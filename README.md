@@ -2,7 +2,9 @@
 
 Projet d’extension Chrome indépendante pour masquer localement les commentaires d’auteurs choisis sur `www.lemonde.fr`.
 
-**Version 1.0.0, en recette finale au 4 novembre 2026.** Extension Manifest V3 complète, compilable et installable localement. La publication sur le Chrome Web Store reste soumise à la validation de l’éditeur ; aucune soumission automatique n’est effectuée.
+**Version 1.0.0, candidate en recette finale au 4 novembre 2026.** Extension Manifest V3 complète, compilable et installable localement. La recette sur le site réel reste à terminer avant qualification de production. La publication sur le Chrome Web Store reste soumise à la validation de l’éditeur ; aucune soumission automatique n’est effectuée.
+
+Les ZIP de l’extension et du dossier Chrome Web Store sont disponibles dans la [release candidate](https://github.com/Nagithan/bloqueur-le-monde/releases/tag/v1.0.0-rc.1). Voir la [recette](docs/RECETTE.md) avant diffusion.
 
 ## Installer ou construire
 

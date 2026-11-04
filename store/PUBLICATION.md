@@ -13,6 +13,7 @@ La publication Chrome Web Store attend la validation explicite de l’utilisateu
 - `store/assets/03-confirmation-1280x800.png` : confirmation de blocage.
 - `store/fiche-fr.md` : nom, descriptions et liens.
 - `store/confidentialite-console.md` : finalité et déclarations de traitement/permissions.
+- `store/notes-test.md` : parcours pour la revue, sans transmission de compte abonné.
 - `PRIVACY.md`, `LICENSE`, `CONTRIBUTING.md` et `docs/RECETTE.md` dans le dépôt public.
 
 Le ZIP n’est pas suivi dans Git ; il est construit depuis les sources du tag. Les captures ne contiennent aucun texte de commentaire d’abonné. Les PNG utilisés par le paquet proviennent du SVG original ; les captures proviennent de la recette du paquet dans Chromium. La provenance est décrite dans `store/assets/provenance.json`.

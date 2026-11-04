@@ -2,6 +2,8 @@
 
 État au 4 novembre 2026 : paquet Manifest V3 testé dans Chromium, revue visuelle terminée ; recette finale sur la session réelle du journal encore à effectuer. La publication Chrome Web Store attend la validation de l’éditeur.
 
+La release `v1.0.0-rc.1` fournit le paquet et le dossier de soumission en tant que candidate. Une installation temporaire dans Brave a été autorisée, mais des changements d’onglet concurrents ont interrompu le pilotage avant son chargement. Aucune installation dans le profil habituel n’a été effectuée pendant cette recette. Le mode développeur n’a pas été activé par nos actions. Cette étape reste à reprendre lorsque le navigateur est disponible.
+
 ## Environnements et preuves
 
 - Node.js 24.22.1, macOS arm64 ; Chromium de test 153.0.8010.12, lancé avec un profil temporaire et le paquet réel `dist/`.
