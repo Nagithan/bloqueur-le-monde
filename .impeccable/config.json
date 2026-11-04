@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "design-system-font",
+        "value": "georgia",
+        "files": [
+          "tests/fixtures/discussion.html"
+        ],
+        "createdAt": "2026-11-04T02:52:36.169Z",
+        "reason": "Agent: intentional synthetic article fixture; Georgia styles only the mock article heading, outside the extension UI documented in DESIGN.md."
+      },
+      {
+        "rule": "overused-font",
+        "value": "arial",
+        "files": [
+          "tests/fixtures/discussion.html"
+        ],
+        "createdAt": "2026-11-04T02:52:36.208Z",
+        "reason": "Agent: intentional synthetic host-page fixture; Arial is a local fallback already documented for injected controls and lets tests verify inheritance from the host Signaler action."
+      }
+    ]
+  }
+}
