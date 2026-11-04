@@ -23,7 +23,7 @@ write_zip(archive, [(file.relative_to(dist).as_posix(), file) for file in dist.r
 # The submission dossier is separate: only the extension ZIP goes into the Store uploader.
 dossier = release / f'dossier-chrome-web-store-{version}.zip'
 files = [(file.relative_to(root).as_posix(), file) for file in (root / 'store').rglob('*') if file.is_file() and file.suffix in ['.md', '.png', '.json']]
-files.extend((name, root / name) for name in ['PRIVACY.md', 'LICENSE', 'CONTRIBUTING.md', 'docs/RECETTE.md', 'docs/INSTALLATION.md'])
+files.extend((name, root / name) for name in ['PRIVACY.md', 'LICENSE', 'CONTRIBUTING.md', 'docs/RECETTE.md', 'docs/INSTALLATION.md', f'docs/recette-{version}.json'])
 files.extend([('icon-128.png', dist / 'icons/128.png'), (archive.name, archive)])
 write_zip(dossier, files)
 checksums = []

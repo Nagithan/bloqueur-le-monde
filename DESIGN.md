@@ -237,6 +237,8 @@ L’action de blocage est un bouton textuel transparent sans bordure ni ombre, s
 
 Le résumé utilise un fond de soutien, un filet et un retrait de (16px) ; les liens d’action se replient avec le texte. Un commentaire devant conserver ses réponses est remplacé par un bandeau compact avec « Afficher ce commentaire ». Ces composants utilisent des couleurs choisies d’après le fond effectif du site. Le nombre affiché porte sur les commentaires chargés et réellement masqués.
 
+Dans le menu du compte actuel, le raccourci local suit l’en-tête du compte, en dehors de son contenu d’identification. Il conserve le rôle de lien, un retrait horizontal de (12px) et une hauteur minimale de (42px). Le sélecteur propre à ce contexte protège son alignement et sa typographie contre les styles généraux des boutons du menu hôte.
+
 ### Toast
 
 Une notification sur le fond principal, avec filet, ombre et rôle d’annonce poli. Le texte est suivi de commandes soulignées : annuler si applicable, gérer les auteurs et fermer. Le délai est de (15s) avec annulation, (10s) sinon ; une commande déjà focalisée n’est pas supprimée au terme du délai.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-04T02:37:54Z",
+  "generatedAt": "2026-11-04T03:02:51Z",
   "title": "Design System: Bloqueur Le Monde",
   "extensions": {
     "colorMeta": {
@@ -316,7 +316,7 @@
       },
       "injected-body": {
         "displayName": "injected-body",
-        "purpose": "Résumés et commentaires remplacés ; hors bouton héritant de Signaler."
+        "purpose": "Résumés, commentaires remplacés et raccourci du compte ; hors bouton héritant de Signaler."
       }
     },
     "shadows": [
@@ -435,11 +435,11 @@
       "css": ".ds-summary{font-family:var(--font-marr-sans,Arial,sans-serif);font-size:14px;line-height:1.5;color:var(--blm-fg,#263244);background:var(--blm-panel,#f5f6f8);padding:16px;border:1px solid var(--blm-line,#d7dce2);border-radius:3px;overflow-wrap:anywhere}.ds-summary-copy{margin:0 0 8px;font:inherit}.ds-summary-actions{display:flex;flex-wrap:wrap;gap:8px 18px}.ds-summary-action{font:inherit;color:var(--blm-link,var(--blm-accent,#075ba7));background:transparent;border:0;padding:2px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}.ds-summary-action:focus-visible{outline:2px solid currentColor;outline-offset:4px}@media(max-width:400px){.ds-summary{padding:12px}}"
     },
     {
-      "name": "Action près de Signaler",
-      "kind": "button",
-      "description": "Le site fournit la police et la couleur effectives ; cet aperçu est un contexte neutre, pas un jeton de typographie native.",
-      "html": "<span class=\"ds-native-context\"><button class=\"ds-block\">Bloquer cet utilisateur</button><button class=\"ds-report\">Signaler</button></span>",
-      "css": ".ds-native-context{font-family:var(--font-marr-sans,Arial,sans-serif);font-size:14px;color:var(--blm-muted,#556173)}.ds-block{appearance:none;border:0;background:transparent;box-shadow:none;color:inherit;font:inherit;line-height:1.4;cursor:pointer;padding:0;margin:0 12px 0 0;white-space:normal;text-align:left;text-decoration:none;vertical-align:baseline;flex-shrink:1}.ds-block:hover{text-decoration:underline;text-underline-offset:3px}.ds-block:focus-visible{outline:2px solid currentColor;outline-offset:4px}.ds-report{font:inherit;color:inherit;border:0;background:transparent;padding:0;text-decoration:underline}.ds-report:focus-visible{outline:2px solid currentColor;outline-offset:4px}@media(max-width:400px){.ds-block{margin-right:8px}}"
+      "name": "Commandes injectées",
+      "kind": "custom",
+      "description": "Le site fournit la police et la couleur effectives ; cet aperçu est un contexte neutre, pas un jeton de typographie native.\n\nDans le menu du compte actuel, le raccourci local suit l’en-tête du compte, en dehors de son contenu d’identification. Il conserve le rôle de lien, un retrait horizontal de (12px) et une hauteur minimale de (42px). Le sélecteur propre à ce contexte protège son alignement et sa typographie contre les styles généraux des boutons du menu hôte.",
+      "html": "<span class=\"ds-native-context\"><button class=\"ds-block\">Bloquer cet utilisateur</button><button class=\"ds-report\">Signaler</button></span><div class=\"ds-account-context\"><button class=\"ds-account-link\">Auteurs masqués — extension</button></div>",
+      "css": ".ds-native-context{font-family:var(--font-marr-sans,Arial,sans-serif);font-size:14px;color:var(--blm-muted,#556173)}.ds-block{appearance:none;border:0;background:transparent;box-shadow:none;color:inherit;font:inherit;line-height:1.4;cursor:pointer;padding:0;margin:0 12px 0 0;white-space:normal;text-align:left;text-decoration:none;vertical-align:baseline;flex-shrink:1}.ds-block:hover{text-decoration:underline;text-underline-offset:3px}.ds-block:focus-visible{outline:2px solid currentColor;outline-offset:4px}.ds-report{font:inherit;color:inherit;border:0;background:transparent;padding:0;text-decoration:underline}.ds-report:focus-visible{outline:2px solid currentColor;outline-offset:4px}@media(max-width:400px){.ds-block{margin-right:8px}}.ds-account-link{appearance:none;color:var(--blm-link,#075ba7);background:transparent;border:0;padding:2px 0;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px;font-family:var(--font-marr-sans,Arial,sans-serif);font-size:14px;display:block;margin:10px 0}.ds-account-context .ds-account-link{width:calc(100% - 24px);min-height:42px;margin:0 12px 12px;padding:8px 0;text-align:left;color:var(--blm-link,#075ba7);font:400 14px/1.5 var(--font-marr-sans,Arial,sans-serif);text-decoration:underline}.ds-account-link:focus-visible{outline:2px solid currentColor;outline-offset:4px}"
     }
   ],
   "narrative": {

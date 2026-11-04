@@ -43,6 +43,16 @@ try {
   await options.getByRole('combobox', { name: 'Choix pour Peps72', exact: true }).waitFor();
   await page.goto('https://www.lemonde.fr/article-fixture'); await page.getByRole('button', { name: 'Voir les commentaires', exact: true }).click();
   await page.getByRole('button', { name: 'Bloquer cet utilisateur : Auteur calme', exact: true }).waitFor(); await hidden('default-1');
+  const accountShortcut = page.getByRole('button', { name: 'Auteurs masqués — extension', exact: true });
+  await accountShortcut.waitFor();
+  assert.equal(await accountShortcut.evaluate(node => node.previousElementSibling?.classList.contains('Connexion__account')), true);
+  assert.equal(await accountShortcut.evaluate(node => node.closest('.Connexion__account')), null);
+  await page.locator('.js-user-connexion').evaluate(node => node.replaceWith(node.cloneNode(true)));
+  await pause(); assert.equal(await accountShortcut.count(), 1);
+  await worker.evaluate(() => { globalThis.blmOptionsOpens = 0; const original = chrome.runtime.openOptionsPage.bind(chrome.runtime); chrome.runtime.openOptionsPage = async () => { globalThis.blmOptionsOpens++; await original(); }; });
+  await accountShortcut.click(); await pause();
+  assert.equal(await worker.evaluate(() => globalThis.blmOptionsOpens), 1);
+  record('R13 : raccourci dans le menu actuel du compte, hors de son en-tête, sans doublon');
   record('R01/R04 : ouverture tardive et liste initiale appliquée');
   assert.equal(await root('calm-1').locator('.blm-block-button').evaluate(node => node.nextElementSibling?.textContent), 'Signaler');
   await root('calm-1').locator('.blm-block-button').evaluate(node => node.click()); await pause();

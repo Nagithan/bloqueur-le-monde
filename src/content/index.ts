@@ -18,6 +18,7 @@ function start(): void {
   const views = new Map<HTMLElement, CommentView>();
   const placeholders = new WeakMap<HTMLElement, HTMLElement>();
   const boundButtons = new WeakSet<HTMLButtonElement>();
+  const boundAccountShortcuts = new WeakSet<HTMLElement>();
   const summary = el('div', { class: 'blm-summary', 'data-blm-owned': '', hidden: '' });
   let timer: ReturnType<typeof setTimeout> | undefined;
   let processing = false;
@@ -33,7 +34,7 @@ function start(): void {
       const target = record.target instanceof Element ? record.target : record.target.parentElement;
       const important = target && (target === document.documentElement || target === document.body || target.closest(DISCUSSION_SELECTOR));
       const structure = [...record.addedNodes, ...record.removedNodes].some(node => node instanceof Element && !isOwned(node) && (node.matches(DISCUSSION_SELECTOR) || !!node.querySelector(DISCUSSION_SELECTOR)));
-      const account = [...record.addedNodes].some(node => node instanceof Element && !!node.querySelector('a[href^="https://compte.lemonde.fr"]'));
+      const account = [...record.addedNodes].some(node => node instanceof Element && (node.matches('a[href^="https://compte.lemonde.fr"]') || !!node.querySelector('a[href^="https://compte.lemonde.fr"]')));
       if (important || structure || account) { schedule(); break; }
     }
   });
@@ -134,11 +135,21 @@ function start(): void {
     if (visible) { const list = getList(discussion); if (list && !summary.isConnected) list.before(summary); }
   }
   function addAccountShortcut(): void {
-    const existing = document.querySelector<HTMLElement>('.blm-account-link');
-    if (existing) { applyThemeTokens(existing, themeOf(existing.parentElement ?? document.body)); return; }
-    const link = [...document.querySelectorAll<HTMLAnchorElement>('a[href^="https://compte.lemonde.fr"]')].find(node => node.closest('[data-component*="account"],.ds-account,.ds-header__account,.account') && !node.closest('[data-blm-ui]'));
-    if (!link?.parentElement) return;
-    const shortcut = button('Auteurs masqués — extension', () => { void client.send({ type: 'options' }).catch(error => toast(error.message, themeOf(document.body))); }, 'blm-account-link'); shortcut.setAttribute('data-blm-owned', ''); applyThemeTokens(shortcut, themeOf(link.parentElement)); link.parentElement.append(shortcut);
+    for (const context of document.querySelectorAll<HTMLElement>('[data-component*="account"],.ds-account,.ds-header__account,.account,.js-user-connexion')) {
+      if (context.closest('[data-blm-ui]')) continue;
+      const existing = context.querySelector<HTMLElement>('.blm-account-link');
+      if (existing && boundAccountShortcuts.has(existing)) { applyThemeTokens(existing, themeOf(context)); continue; }
+      existing?.remove();
+      const link = context.querySelector<HTMLAnchorElement>('a[href^="https://compte.lemonde.fr"]');
+      if (!link?.parentElement) continue;
+      const shortcut = button('Auteurs masqués — extension', () => { void client.send({ type: 'options' }).catch(error => toast(error.message, themeOf(document.body))); }, 'blm-account-link');
+      shortcut.setAttribute('data-blm-owned', ''); applyThemeTokens(shortcut, themeOf(context));
+      boundAccountShortcuts.add(shortcut);
+      // The current host groups subscription details in this header. Keep the local
+      // preference shortcut as its sibling, outside account-identifying content.
+      const header = link.closest('.Connexion__account');
+      if (header && context.contains(header)) header.after(shortcut); else link.parentElement.append(shortcut);
+    }
   }
   function applyThemeTokens(node: HTMLElement, theme: 'light' | 'dark'): void {
     const dark = theme === 'dark'; node.style.setProperty('--blm-fg', dark ? '#f0f2f5' : '#263244'); node.style.setProperty('--blm-bg', dark ? '#2c3441' : '#f5f6f8'); node.style.setProperty('--blm-link', dark ? '#9aceff' : '#075ba7');

@@ -8,4 +8,5 @@
 - Liste communautaire versionnée, incluse dans le paquet et désactivable, avec `Peps72` comme entrée initiale.
 - Import prévisualisé, export local, réinitialisation et stockage privé à l’extension ; aucune communication réseau applicative.
 - Tests du paquet réel sur fixtures, contrôles de permissions, accessibilité automatisée et banc de charge ; limites consignées dans la recette.
+- Recette réelle sur deux articles, sélection native du gestionnaire et zoom 200 % ; raccourci adapté au menu du compte actuel.
 - ZIP reproductible, captures de démonstration et dossier de soumission Chrome Web Store. Publication Store après validation de l’éditeur.

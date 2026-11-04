@@ -10,4 +10,5 @@
 .blm-summary button,.blm-placeholder button,.blm-account-link{appearance:none;color:var(--blm-link,#075ba7);background:transparent;border:0;padding:2px 0;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
 .blm-placeholder{padding:10px 12px;margin-bottom:10px;border-radius:3px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .blm-account-link{font-family:var(--font-marr-sans,Arial,sans-serif);font-size:14px;display:block;margin:10px 0}
+.js-user-connexion .blm-account-link{width:calc(100% - 24px);min-height:42px;margin:0 12px 12px;padding:8px 0;text-align:left;color:var(--blm-link,#075ba7);font:400 14px/1.5 var(--font-marr-sans,Arial,sans-serif);text-decoration:underline}
 @media(max-width:400px){.blm-block-button{margin-right:8px}.blm-summary{padding:12px}}
