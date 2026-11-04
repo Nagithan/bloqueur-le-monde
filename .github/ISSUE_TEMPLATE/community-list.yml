@@ -1,0 +1,37 @@
+name: Liste communautaire
+description: Proposer un ajout, une correction ou un retrait de préférence de filtrage.
+title: "[Liste] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Une proposition est revue avant toute inclusion. La liste exprime des préférences de lecture.
+        Ne fournissez ni donnée privée, ni identité réelle, ni insulte ou appel à contacter l’auteur.
+  - type: dropdown
+    id: change
+    attributes:
+      label: Modification proposée
+      options:
+        - Ajout
+        - Correction
+        - Retrait
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: Pseudonyme public exact
+    validations:
+      required: true
+  - type: input
+    id: author-id
+    attributes:
+      label: Identifiant d’auteur public vérifiable, si disponible
+      description: Un identifiant de commentaire ne constitue pas un identifiant d’auteur.
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexte minimal pour la revue
+      description: Expliquez la proposition ou la correction, et toute ambiguïté de pseudonyme. N’incluez pas de texte d’abonné ni de donnée privée.
+    validations:
+      required: true

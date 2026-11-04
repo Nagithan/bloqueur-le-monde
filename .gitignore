@@ -1,0 +1,20 @@
+.DS_Store
+.impeccable/
+
+# Pièces d'audit locales, captures de la session et paquets tiers.
+audit/
+vendor/
+*.crx
+
+# Environnement, dépendances et artefacts de développement.
+.env
+.env.*
+!.env.example
+node_modules/
+dist/
+build/
+output/
+coverage/
+*.log
+*.zip
+*.pem
