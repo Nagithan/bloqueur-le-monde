@@ -1,6 +1,6 @@
 # Cahier des charges — Bloqueur Le Monde
 
-Version de cadrage du 4 novembre 2026. Proposition prête pour revue, avant implémentation.
+Référence fonctionnelle du 4 novembre 2026. La version 1.0.0 est implémentée ; les résultats et limites de validation sont consignés dans [RECETTE.md](RECETTE.md).
 
 ## 1. Finalité et périmètre
 

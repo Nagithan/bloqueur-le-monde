@@ -1,6 +1,6 @@
 # Contribuer
 
-Le projet est au stade du cahier des charges. Les contributions doivent préciser l’exigence concernée et le résultat attendu. Les instructions de build et de tests seront ajoutées avec le premier code fonctionnel.
+Les contributions doivent préciser l’exigence concernée et le résultat attendu. Utiliser Node.js 24 ; les commandes d’installation, de build et de recette figurent dans [INSTALLATION.md](docs/INSTALLATION.md). Exécuter `npm run check` avant de proposer un changement de comportement et vérifier le paquet réellement construit.
 
 ## Contributions techniques
 
@@ -22,6 +22,8 @@ Fournir le pseudonyme exact, l’éventuel identifiant d’auteur public vérifi
 Ne pas fournir de données privées, d’informations sur l’identité réelle, d’insultes ou d’appels à contacter un commentateur. Une correction ou un retrait peut être proposé sans révéler d’identité privée. Les responsables peuvent refuser une entrée insuffisamment établie ou fermer une discussion qui quitte le sujet du filtrage.
 
 Les exceptions personnelles restent prioritaires. Une contribution ne doit pas réactiver une entrée qu’un lecteur a choisi d’afficher, ni convertir automatiquement ses choix locaux en proposition publique.
+
+Modifier `data/community-list.json` et ajouter une entrée à `data/community-history.json` avec la nouvelle version, les ajouts et retraits. Le build valide le schéma et l’unicité ; les tests doivent rester compatibles avec l’évolution volontaire de la liste. Ne pas confondre des fixtures de test avec un avis sur une personne.
 
 ## Préparer une publication
 

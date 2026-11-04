@@ -2,17 +2,32 @@
 
 Projet d’extension Chrome indépendante pour masquer localement les commentaires d’auteurs choisis sur `www.lemonde.fr`.
 
-**État : cadrage, au 4 novembre 2026.** Le dépôt contient le cahier des charges et les décisions d’architecture. Il ne contient pas encore d’extension installable. Le dépôt est local ; aucun dépôt GitHub ni publication sur le Chrome Web Store n’a encore été créé.
+**Version 1.0.0, en recette finale au 4 novembre 2026.** Extension Manifest V3 complète, compilable et installable localement. La publication sur le Chrome Web Store reste soumise à la validation de l’éditeur ; aucune soumission automatique n’est effectuée.
+
+## Installer ou construire
+
+Voir le [guide d’installation](docs/INSTALLATION.md). Le ZIP d’une release se décompresse et se charge via « Charger l’extension non empaquetée » dans `chrome://extensions`.
+
+```sh
+npm ci --ignore-scripts
+npx playwright install chromium
+npm run check
+npm run package
+```
+
+Node.js 24 et Python 3 sont nécessaires pour le développement. Le build se trouve dans `dist/`, le ZIP et son empreinte dans `release/`. Aucun compte, serveur ou clé d’API propre à l’extension.
 
 ## Documents
 
 - [Cahier des charges](docs/CAHIER_DES_CHARGES.md) : parcours, règles de filtrage, confidentialité, critères de recette et étapes de réalisation.
-- [Architecture proposée](docs/ARCHITECTURE.md) : permissions, stockage, identité des auteurs, composants et stratégie de validation.
+- [Architecture](docs/ARCHITECTURE.md) : permissions, stockage, identité des auteurs, composants et stratégie de validation.
 - [Recherche et audit de l’existant](docs/EXISTANT.md) : ce qui a été vérifié et les limites de l’audit.
 - [Contribuer](CONTRIBUTING.md) : contributions techniques et propositions pour la liste communautaire.
-- [Engagement de confidentialité visé](PRIVACY.md) : exigences auxquelles devra satisfaire l’extension avant diffusion.
+- [Confidentialité](PRIVACY.md) : données utilisées localement, permissions et contrôle par le lecteur.
+- [Recette et limites](docs/RECETTE.md) : preuves, environnements et vérifications restantes.
+- [Dossier Chrome Web Store](store/PUBLICATION.md) : textes, captures de démonstration et préparation de soumission.
 
-## Comportement prévu
+## Fonctionnement
 
 1. « Bloquer cet utilisateur » apparaît immédiatement à gauche de « Signaler ».
 2. Une confirmation précède l’enregistrement du choix et le masquage des commentaires de cet auteur, y compris ceux chargés plus tard.
@@ -31,8 +46,12 @@ Le masquage concerne ce profil de navigateur. Il n’empêche pas un auteur de r
 - Interface cohérente avec Le Monde, accessible au clavier et adaptée au thème réellement affiché par le site.
 - Code original sous [licence MIT](LICENSE) ; projet non affilié au journal Le Monde.
 
-## Prochaine étape
+## Vérifications et limites
 
-Le premier travail de développement sera une vérification ciblée du DOM actuel, de l’identité disponible des auteurs et du comportement de la fenêtre de commentaires, puis un prototype de blocage personnel. Les hypothèses à vérifier figurent à la fin du cahier des charges.
+Les tests d’intégration chargent réellement l’extension dans un profil Chromium temporaire et utilisent des discussions fictives. Ils vérifient notamment le contenu tardif, les réponses, les exceptions, l’import/export, les écritures concurrentes, les erreurs de stockage et l’accessibilité. Les mesures de charge utilisent 1 000 commentaires et 5 000 règles. La matrice complète et les limites de la recette sur le site réel figurent dans [RECETTE.md](docs/RECETTE.md).
+
+Les pseudonymes sont comparés exactement lorsque le DOM ne fournit pas un identifiant public d’auteur utilisable : homonymes et changements de pseudonyme restent une limite. Les préférences concernent le profil Chrome, sans synchronisation avec le compte du Monde ou d’autres appareils. Les commentaires réservés aux abonnés nécessitent toujours un accès légitime au site.
+
+Les propositions pour la liste communautaire sont revues avant inclusion dans une version. Le fichier public actuel est [community-list.json](data/community-list.json) et son historique est [community-history.json](data/community-history.json).
 
 Les pièces complètes de l’audit précédent sont conservées dans le dossier local `audit/`, exclu de Git. Aucun code de l’extension auditée n’est repris.

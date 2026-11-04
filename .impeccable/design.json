@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-04T02:37:54Z",
+  "title": "Design System: Bloqueur Le Monde",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Fond principal · clair",
+        "tonalRamp": [
+          "oklch(15% 0.00000 0.00)",
+          "oklch(26% 0.00000 0.00)",
+          "oklch(37% 0.00000 0.00)",
+          "oklch(48% 0.00000 0.00)",
+          "oklch(60% 0.00000 0.00)",
+          "oklch(72% 0.00000 0.00)",
+          "oklch(84% 0.00000 0.00)",
+          "oklch(95% 0.00000 0.00)"
+        ]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Fond de soutien · clair",
+        "tonalRamp": [
+          "oklch(15% 0.00287 264.54)",
+          "oklch(26% 0.00287 264.54)",
+          "oklch(37% 0.00287 264.54)",
+          "oklch(48% 0.00287 264.54)",
+          "oklch(60% 0.00287 264.54)",
+          "oklch(72% 0.00287 264.54)",
+          "oklch(84% 0.00287 264.54)",
+          "oklch(95% 0.00287 264.54)"
+        ]
+      },
+      "fg": {
+        "role": "neutral",
+        "displayName": "Encre de lecture · clair",
+        "tonalRamp": [
+          "oklch(15% 0.03637 258.32)",
+          "oklch(26% 0.03637 258.32)",
+          "oklch(37% 0.03637 258.32)",
+          "oklch(48% 0.03637 258.32)",
+          "oklch(60% 0.03637 258.32)",
+          "oklch(72% 0.03637 258.32)",
+          "oklch(84% 0.03637 258.32)",
+          "oklch(95% 0.03637 258.32)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Encre secondaire · clair",
+        "tonalRamp": [
+          "oklch(15% 0.03258 258.37)",
+          "oklch(26% 0.03258 258.37)",
+          "oklch(37% 0.03258 258.37)",
+          "oklch(48% 0.03258 258.37)",
+          "oklch(60% 0.03258 258.37)",
+          "oklch(72% 0.03258 258.37)",
+          "oklch(84% 0.03258 258.37)",
+          "oklch(95% 0.03258 258.37)"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Filet · clair",
+        "tonalRamp": [
+          "oklch(15% 0.00985 252.82)",
+          "oklch(26% 0.00985 252.82)",
+          "oklch(37% 0.00985 252.82)",
+          "oklch(48% 0.00985 252.82)",
+          "oklch(60% 0.00985 252.82)",
+          "oklch(72% 0.00985 252.82)",
+          "oklch(84% 0.00985 252.82)",
+          "oklch(95% 0.00985 252.82)"
+        ]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Bleu de lien · clair",
+        "tonalRamp": [
+          "oklch(15% 0.14122 252.98)",
+          "oklch(26% 0.14122 252.98)",
+          "oklch(37% 0.14122 252.98)",
+          "oklch(48% 0.14122 252.98)",
+          "oklch(60% 0.14122 252.98)",
+          "oklch(72% 0.14122 252.98)",
+          "oklch(84% 0.14122 252.98)",
+          "oklch(95% 0.14122 252.98)"
+        ]
+      },
+      "button": {
+        "role": "primary",
+        "displayName": "Encre de commande · clair",
+        "tonalRamp": [
+          "oklch(15% 0.05462 255.16)",
+          "oklch(26% 0.05462 255.16)",
+          "oklch(37% 0.05462 255.16)",
+          "oklch(48% 0.05462 255.16)",
+          "oklch(60% 0.05462 255.16)",
+          "oklch(72% 0.05462 255.16)",
+          "oklch(84% 0.05462 255.16)",
+          "oklch(95% 0.05462 255.16)"
+        ]
+      },
+      "on-button": {
+        "role": "primary",
+        "displayName": "Texte sur commande · clair",
+        "tonalRamp": [
+          "oklch(15% 0.00000 0.00)",
+          "oklch(26% 0.00000 0.00)",
+          "oklch(37% 0.00000 0.00)",
+          "oklch(48% 0.00000 0.00)",
+          "oklch(60% 0.00000 0.00)",
+          "oklch(72% 0.00000 0.00)",
+          "oklch(84% 0.00000 0.00)",
+          "oklch(95% 0.00000 0.00)"
+        ]
+      },
+      "error": {
+        "role": "primary",
+        "displayName": "Rouge d’erreur · clair",
+        "tonalRamp": [
+          "oklch(15% 0.16206 27.38)",
+          "oklch(26% 0.16206 27.38)",
+          "oklch(37% 0.16206 27.38)",
+          "oklch(48% 0.16206 27.38)",
+          "oklch(60% 0.16206 27.38)",
+          "oklch(72% 0.16206 27.38)",
+          "oklch(84% 0.16206 27.38)",
+          "oklch(95% 0.16206 27.38)"
+        ]
+      },
+      "ring": {
+        "role": "primary",
+        "displayName": "Bleu de focus · clair",
+        "tonalRamp": [
+          "oklch(15% 0.14365 249.96)",
+          "oklch(26% 0.14365 249.96)",
+          "oklch(37% 0.14365 249.96)",
+          "oklch(48% 0.14365 249.96)",
+          "oklch(60% 0.14365 249.96)",
+          "oklch(72% 0.14365 249.96)",
+          "oklch(84% 0.14365 249.96)",
+          "oklch(95% 0.14365 249.96)"
+        ]
+      },
+      "dark-bg": {
+        "role": "neutral",
+        "displayName": "Fond principal · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.02236 262.46)",
+          "oklch(26% 0.02236 262.46)",
+          "oklch(37% 0.02236 262.46)",
+          "oklch(48% 0.02236 262.46)",
+          "oklch(60% 0.02236 262.46)",
+          "oklch(72% 0.02236 262.46)",
+          "oklch(84% 0.02236 262.46)",
+          "oklch(95% 0.02236 262.46)"
+        ]
+      },
+      "dark-panel": {
+        "role": "neutral",
+        "displayName": "Fond de soutien · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.02571 260.06)",
+          "oklch(26% 0.02571 260.06)",
+          "oklch(37% 0.02571 260.06)",
+          "oklch(48% 0.02571 260.06)",
+          "oklch(60% 0.02571 260.06)",
+          "oklch(72% 0.02571 260.06)",
+          "oklch(84% 0.02571 260.06)",
+          "oklch(95% 0.02571 260.06)"
+        ]
+      },
+      "dark-fg": {
+        "role": "neutral",
+        "displayName": "Encre de lecture · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.00455 258.32)",
+          "oklch(26% 0.00455 258.32)",
+          "oklch(37% 0.00455 258.32)",
+          "oklch(48% 0.00455 258.32)",
+          "oklch(60% 0.00455 258.32)",
+          "oklch(72% 0.00455 258.32)",
+          "oklch(84% 0.00455 258.32)",
+          "oklch(95% 0.00455 258.32)"
+        ]
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Encre secondaire · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.02311 254.42)",
+          "oklch(26% 0.02311 254.42)",
+          "oklch(37% 0.02311 254.42)",
+          "oklch(48% 0.02311 254.42)",
+          "oklch(60% 0.02311 254.42)",
+          "oklch(72% 0.02311 254.42)",
+          "oklch(84% 0.02311 254.42)",
+          "oklch(95% 0.02311 254.42)"
+        ]
+      },
+      "dark-line": {
+        "role": "neutral",
+        "displayName": "Filet · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.02898 257.68)",
+          "oklch(26% 0.02898 257.68)",
+          "oklch(37% 0.02898 257.68)",
+          "oklch(48% 0.02898 257.68)",
+          "oklch(60% 0.02898 257.68)",
+          "oklch(72% 0.02898 257.68)",
+          "oklch(84% 0.02898 257.68)",
+          "oklch(95% 0.02898 257.68)"
+        ]
+      },
+      "dark-accent": {
+        "role": "primary",
+        "displayName": "Bleu de lien · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.08792 247.43)",
+          "oklch(26% 0.08792 247.43)",
+          "oklch(37% 0.08792 247.43)",
+          "oklch(48% 0.08792 247.43)",
+          "oklch(60% 0.08792 247.43)",
+          "oklch(72% 0.08792 247.43)",
+          "oklch(84% 0.08792 247.43)",
+          "oklch(95% 0.08792 247.43)"
+        ]
+      },
+      "dark-button": {
+        "role": "primary",
+        "displayName": "Encre de commande · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.04767 250.31)",
+          "oklch(26% 0.04767 250.31)",
+          "oklch(37% 0.04767 250.31)",
+          "oklch(48% 0.04767 250.31)",
+          "oklch(60% 0.04767 250.31)",
+          "oklch(72% 0.04767 250.31)",
+          "oklch(84% 0.04767 250.31)",
+          "oklch(95% 0.04767 250.31)"
+        ]
+      },
+      "dark-on-button": {
+        "role": "primary",
+        "displayName": "Texte sur commande · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.03488 255.85)",
+          "oklch(26% 0.03488 255.85)",
+          "oklch(37% 0.03488 255.85)",
+          "oklch(48% 0.03488 255.85)",
+          "oklch(60% 0.03488 255.85)",
+          "oklch(72% 0.03488 255.85)",
+          "oklch(84% 0.03488 255.85)",
+          "oklch(95% 0.03488 255.85)"
+        ]
+      },
+      "dark-error": {
+        "role": "primary",
+        "displayName": "Rouge d’erreur · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.08455 28.84)",
+          "oklch(26% 0.08455 28.84)",
+          "oklch(37% 0.08455 28.84)",
+          "oklch(48% 0.08455 28.84)",
+          "oklch(60% 0.08455 28.84)",
+          "oklch(72% 0.08455 28.84)",
+          "oklch(84% 0.08455 28.84)",
+          "oklch(95% 0.08455 28.84)"
+        ]
+      },
+      "dark-ring": {
+        "role": "primary",
+        "displayName": "Bleu de focus · sombre",
+        "tonalRamp": [
+          "oklch(15% 0.08793 245.93)",
+          "oklch(26% 0.08793 245.93)",
+          "oklch(37% 0.08793 245.93)",
+          "oklch(48% 0.08793 245.93)",
+          "oklch(60% 0.08793 245.93)",
+          "oklch(72% 0.08793 245.93)",
+          "oklch(84% 0.08793 245.93)",
+          "oklch(95% 0.08793 245.93)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "title": {
+        "displayName": "title",
+        "purpose": "Titre des options ; 24px à 720px et moins."
+      },
+      "section": {
+        "displayName": "section",
+        "purpose": "Titres de liste ; les réglages utilisent une variante de 17px."
+      },
+      "dialog-title": {
+        "displayName": "dialog-title",
+        "purpose": "Titre de fenêtre ; 20px à 720px et moins."
+      },
+      "body": {
+        "displayName": "body",
+        "purpose": "Lecture courante des surfaces partagées, pile système autonome dans les options."
+      },
+      "label": {
+        "displayName": "label",
+        "purpose": "Libellés et états ordinaires."
+      },
+      "hint": {
+        "displayName": "hint",
+        "purpose": "Aides, provenance et versions."
+      },
+      "button": {
+        "displayName": "button",
+        "purpose": "Commandes pleines et secondaires."
+      },
+      "injected-body": {
+        "displayName": "injected-body",
+        "purpose": "Résumés et commentaires remplacés ; hors bouton héritant de Signaler."
+      }
+    },
+    "shadows": [
+      {
+        "name": "dialog",
+        "value": "0 18px 60px #0003",
+        "purpose": "Fenêtres de confirmation et gestionnaire."
+      },
+      {
+        "name": "toast",
+        "value": "0 10px 36px #0002",
+        "purpose": "Notification locale superposée."
+      }
+    ],
+    "motion": [
+      {
+        "name": "dialog-enter-duration",
+        "value": ".16s",
+        "purpose": "Apparition de fenêtre uniquement sous prefers-reduced-motion: no-preference."
+      },
+      {
+        "name": "dialog-enter-easing",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Décélération de l’apparition."
+      },
+      {
+        "name": "dialog-enter-offset",
+        "value": "translateY(6px) → translateY(0)",
+        "purpose": "Translation verticale du dialogue ; aucune animation quand le mouvement est réduit."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "options-stack",
+        "value": "720px"
+      },
+      {
+        "name": "injected-compact",
+        "value": "400px"
+      },
+      {
+        "name": "author-row-stack",
+        "value": "390px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Bouton principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Confirmer une action ou ajouter un auteur.",
+      "html": "<button class=\"ds-primary\">Masquer</button>",
+      "css": ".ds-primary{font-family:var(--font-marr-sans,system-ui),sans-serif;font-size:16px;font-weight:600;line-height:1.35;display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 15px;border:1px solid var(--blm-line,#d7dce2);border-radius:4px;cursor:pointer;background:var(--blm-button,#263b56);border-color:var(--blm-button,#263b56);color:var(--blm-on-button,#fff)}.ds-primary:hover{filter:brightness(.93)}.ds-primary:focus-visible{outline:3px solid var(--blm-ring,#086bb7);outline-offset:3px;}.ds-primary:disabled{cursor:wait;opacity:.6}"
+    },
+    {
+      "name": "Bouton secondaire",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Annuler ou agir sans renforcer la priorité visuelle.",
+      "html": "<button class=\"ds-secondary\">Annuler</button>",
+      "css": ".ds-secondary{font-family:var(--font-marr-sans,system-ui),sans-serif;font-size:16px;font-weight:600;line-height:1.35;display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 15px;border:1px solid var(--blm-line,#d7dce2);border-radius:4px;cursor:pointer;background:var(--blm-bg,#fff);color:var(--blm-fg,#263244)}.ds-secondary:hover{background:var(--blm-panel,#f5f6f8)}.ds-secondary:focus-visible{outline:3px solid var(--blm-ring,#086bb7);outline-offset:3px;}.ds-secondary:disabled{cursor:wait;opacity:.6}"
+    },
+    {
+      "name": "Petit bouton secondaire",
+      "kind": "button",
+      "refersTo": "button-small",
+      "description": "Exporter ou importer avec une densité réduite.",
+      "html": "<button class=\"ds-small\">Exporter</button>",
+      "css": ".ds-small{font-family:var(--font-marr-sans,system-ui),sans-serif;font-size:13px;line-height:1.35;font-weight:600;display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:6px 10px;border:1px solid var(--blm-line,#d7dce2);border-radius:4px;background:var(--blm-bg,#fff);color:var(--blm-fg,#263244);cursor:pointer}.ds-small:hover{background:var(--blm-panel,#f5f6f8)}.ds-small:focus-visible{outline:3px solid var(--blm-ring,#086bb7);outline-offset:3px}.ds-small:disabled{cursor:wait;opacity:.6}"
+    },
+    {
+      "name": "Commande textuelle",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Fermeture, annulation de notification ou outil discret.",
+      "html": "<button class=\"ds-text\">Annuler</button>",
+      "css": ".ds-text{font-family:var(--font-marr-sans,system-ui),sans-serif;font-size:16px;line-height:1.35;font-weight:500;color:var(--blm-accent,#075ba7);border:0;background:transparent;padding:4px 2px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.ds-text:focus-visible{outline:3px solid var(--blm-ring,#086bb7);outline-offset:3px;}.ds-text:disabled{cursor:wait;opacity:.6}"
+    },
+    {
+      "name": "Champ de recherche",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Rechercher un pseudonyme dans les préférences.",
+      "html": "<label class=\"ds-field\">Rechercher un auteur<input class=\"ds-input\" type=\"search\" placeholder=\"Rechercher un pseudonyme\"></label>",
+      "css": ".ds-field{font-family:var(--font-marr-sans,system-ui),sans-serif;display:grid;gap:6px;font-size:14px;color:var(--blm-fg,#263244)}.ds-input{font:inherit;font-size:16px;min-height:42px;width:100%;padding:8px 10px;border:1px solid var(--blm-line,#d7dce2);border-radius:4px;background:var(--blm-bg,#fff);color:var(--blm-fg,#263244);caret-color:var(--blm-accent,#075ba7)}.ds-input::placeholder{color:var(--blm-muted,#556173);opacity:1}.ds-input:focus-visible{outline:3px solid var(--blm-ring,#086bb7);outline-offset:3px;}"
+    },
+    {
+      "name": "Ligne d’auteur",
+      "kind": "custom",
+      "description": "Nom, provenance et choix de filtrage natif ; exemple synthétique.",
+      "html": "<div class=\"ds-row\"><div><p class=\"ds-name\">Auteur de démonstration</p><p class=\"ds-hint\">Personnel · Pseudonyme exact</p></div><select class=\"ds-choice\" aria-label=\"Choix pour Auteur de démonstration\"><option>Toujours masquer</option><option>Toujours afficher</option><option>Retirer mon choix</option></select></div>",
+      "css": ".ds-row{font-family:var(--font-marr-sans,system-ui),sans-serif;display:grid;grid-template-columns:minmax(0,1fr) 180px;align-items:center;gap:16px;padding:17px 0;border-bottom:1px solid var(--blm-line,#d7dce2);color:var(--blm-fg,#263244);font-size:16px;line-height:1.5}.ds-name{margin:0;font-weight:650;overflow-wrap:anywhere}.ds-hint{margin:4px 0 0;font-size:13px;color:var(--blm-muted,#556173)}.ds-choice{font:inherit;font-size:13px;min-height:38px;padding:8px 10px;border:1px solid var(--blm-line,#d7dce2);border-radius:4px;background:var(--blm-bg,#fff);color:var(--blm-fg,#263244);width:100%;cursor:pointer}.ds-choice:focus-visible{outline:3px solid var(--blm-ring,#086bb7);outline-offset:3px;}@media(max-width:720px){.ds-row{grid-template-columns:minmax(0,1fr) 160px;gap:10px}}@media(max-width:390px){.ds-row{grid-template-columns:1fr;gap:8px}}"
+    },
+    {
+      "name": "Réglage à cocher",
+      "kind": "input",
+      "description": "Case native accompagnée d’un titre et d’une conséquence explicite.",
+      "html": "<label class=\"ds-toggle\"><input class=\"ds-checkbox\" type=\"checkbox\" checked><span><strong class=\"ds-toggle-title\">Activer le filtrage</strong><span class=\"ds-toggle-hint\">Désactiver restaure les commentaires et conserve vos choix.</span></span></label>",
+      "css": ".ds-toggle{font-family:var(--font-marr-sans,system-ui),sans-serif;display:flex;align-items:flex-start;gap:10px;cursor:pointer;color:var(--blm-fg,#263244);line-height:1.5}.ds-checkbox{accent-color:var(--blm-button,#263b56);width:18px;height:18px;flex:none;margin:3px 0 0}.ds-checkbox:focus-visible{outline:3px solid var(--blm-ring,#086bb7);outline-offset:3px;}.ds-toggle-title{display:block;font-size:15px}.ds-toggle-hint{display:block;margin-top:4px;font-size:13px;color:var(--blm-muted,#556173)}"
+    },
+    {
+      "name": "Fenêtre de confirmation",
+      "kind": "custom",
+      "refersTo": "dialog",
+      "description": "Aperçu statique du conteneur de dialogue ; le piégeage et le retour du focus appartiennent au composant natif livré.",
+      "html": "<section class=\"ds-dialog\" aria-label=\"Confirmation de masquage\"><header class=\"ds-dialog-head\"><h2 class=\"ds-dialog-title\">Masquer les commentaires de cet auteur ?</h2><button class=\"ds-close\">Fermer</button></header><div class=\"ds-dialog-body\"><p class=\"ds-author\">Auteur de démonstration</p><p class=\"ds-dialog-hint\">Ce masquage s’applique sur ce profil Chrome.</p><div class=\"ds-dialog-actions\"><button class=\"ds-cancel\">Annuler</button><button class=\"ds-confirm\">Bloquer cet utilisateur</button></div></div></section>",
+      "css": ".ds-dialog{font-family:var(--font-marr-sans,system-ui),sans-serif;width:min(580px,calc(100vw - 32px));max-height:calc(100dvh - 48px);overflow:auto;border:1px solid var(--blm-line,#d7dce2);border-radius:8px;background:var(--blm-bg,#fff);color:var(--blm-fg,#263244);box-shadow:0 18px 60px #0003}.ds-dialog-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:24px 24px 0}.ds-dialog-title{font-size:22px;line-height:1.4;margin:0}.ds-close{font:inherit;border:0;background:transparent;color:var(--blm-accent,#075ba7);padding:4px 2px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.ds-dialog-body{padding:20px 24px 26px}.ds-author{font-size:18px;font-weight:650;margin:0;overflow-wrap:anywhere}.ds-dialog-hint{font-size:13px;line-height:1.5;color:var(--blm-muted,#556173);margin-top:14px}.ds-dialog-actions{display:flex;justify-content:flex-end;gap:12px;margin-top:24px;flex-wrap:wrap}.ds-cancel,.ds-confirm{font-family:var(--font-marr-sans,system-ui),sans-serif;font-size:16px;font-weight:600;line-height:1.35;display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:9px 15px;border:1px solid var(--blm-line,#d7dce2);border-radius:4px;cursor:pointer;background:var(--blm-bg,#fff);color:var(--blm-fg,#263244)}.ds-confirm{background:var(--blm-button,#263b56);border-color:var(--blm-button,#263b56);color:var(--blm-on-button,#fff)}.ds-cancel:hover{background:var(--blm-panel,#f5f6f8)}.ds-confirm:hover{filter:brightness(.93)}.ds-close:focus-visible,.ds-cancel:focus-visible,.ds-confirm:focus-visible{outline:3px solid var(--blm-ring,#086bb7);outline-offset:3px;}@media(max-width:720px){.ds-dialog-head{padding:20px 20px 0}.ds-dialog-body{padding:18px 20px 22px}.ds-dialog-title{font-size:20px}.ds-dialog-actions button{flex:1}}"
+    },
+    {
+      "name": "Résumé du filtrage",
+      "kind": "custom",
+      "refersTo": "summary",
+      "description": "Panneau placé avant les commentaires ; texte de démonstration.",
+      "html": "<div class=\"ds-summary\"><p class=\"ds-summary-copy\">2 commentaires masqués de 2 auteurs parmi les commentaires chargés.</p><div class=\"ds-summary-actions\"><button class=\"ds-summary-action\">Gérer les auteurs</button><button class=\"ds-summary-action\">Afficher temporairement</button></div></div>",
+      "css": ".ds-summary{font-family:var(--font-marr-sans,Arial,sans-serif);font-size:14px;line-height:1.5;color:var(--blm-fg,#263244);background:var(--blm-panel,#f5f6f8);padding:16px;border:1px solid var(--blm-line,#d7dce2);border-radius:3px;overflow-wrap:anywhere}.ds-summary-copy{margin:0 0 8px;font:inherit}.ds-summary-actions{display:flex;flex-wrap:wrap;gap:8px 18px}.ds-summary-action{font:inherit;color:var(--blm-link,var(--blm-accent,#075ba7));background:transparent;border:0;padding:2px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}.ds-summary-action:focus-visible{outline:2px solid currentColor;outline-offset:4px}@media(max-width:400px){.ds-summary{padding:12px}}"
+    },
+    {
+      "name": "Action près de Signaler",
+      "kind": "button",
+      "description": "Le site fournit la police et la couleur effectives ; cet aperçu est un contexte neutre, pas un jeton de typographie native.",
+      "html": "<span class=\"ds-native-context\"><button class=\"ds-block\">Bloquer cet utilisateur</button><button class=\"ds-report\">Signaler</button></span>",
+      "css": ".ds-native-context{font-family:var(--font-marr-sans,Arial,sans-serif);font-size:14px;color:var(--blm-muted,#556173)}.ds-block{appearance:none;border:0;background:transparent;box-shadow:none;color:inherit;font:inherit;line-height:1.4;cursor:pointer;padding:0;margin:0 12px 0 0;white-space:normal;text-align:left;text-decoration:none;vertical-align:baseline;flex-shrink:1}.ds-block:hover{text-decoration:underline;text-underline-offset:3px}.ds-block:focus-visible{outline:2px solid currentColor;outline-offset:4px}.ds-report{font:inherit;color:inherit;border:0;background:transparent;padding:0;text-decoration:underline}.ds-report:focus-visible{outline:2px solid currentColor;outline-offset:4px}@media(max-width:400px){.ds-block{margin-right:8px}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "L’interface de lecture existante",
+    "overview": "Le repère est l’interface du Monde déjà chargée : l’action injectée rejoint « Signaler » avec sa typographie et sa couleur effectives. L’extension garde une présence discrète, lisible et directement manipulable, sans construire une nouvelle identité pour le journal.\n\nLes surfaces propres à l’extension emploient des fonds neutres, une encre bleu nuit et des séparations fines. Dans la page d’options, la pile système est autonome ; dans le site, les polices déjà disponibles peuvent être héritées. Les thèmes clair et sombre sont deux jeux de rôles équivalents : le site décide du thème des commandes injectées, tandis que les options proposent un choix local.",
+    "keyCharacteristics": [
+      "Une hiérarchie compacte, avec texte courant et commandes explicites.",
+      "Des listes séparées par des filets ; les panneaux colorés signalent une information ou une vérification.",
+      "Des actions réversibles, une annulation visible et des états de focus marqués.",
+      "Aucune police distante ; la mention « Extension indépendante » accompagne les options."
+    ],
+    "rules": [
+      {
+        "name": "The Host Authority Rule",
+        "body": "La commande placée à gauche de « Signaler » reprend sa police et sa couleur calculées ; les modales et résumés suivent le thème effectif du site, pas la préférence système des options.",
+        "section": "colors"
+      },
+      {
+        "name": "The Reading Hierarchy Rule",
+        "body": "Réserver la graisse et la taille aux titres, noms et commandes ; conserver les explications en texte courant ou secondaire, avec des libellés en casse naturelle.",
+        "section": "typography"
+      },
+      {
+        "name": "The Overlay Depth Rule",
+        "body": "Les ombres identifient les fenêtres et notifications superposées ; les listes et sections ordinaires se distinguent par le fond ou un filet.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do conserver les rôles clair et sombre ensemble lorsque vous ajoutez un état visuel.",
+      "Do reprendre la police et la couleur du bouton « Signaler » pour l’action injectée.",
+      "Do conserver un focus visible, une action d’annulation et le retour du focus à une commande encore présente.",
+      "Do laisser les noms longs se replier et les groupes d’actions revenir à la ligne.",
+      "Do garder les options autonomes avec la pile système et la mention « Extension indépendante »."
+    ],
+    "donts": [
+      "Don’t remplacer l’autorité visuelle héritée du Monde par une identité concurrente.",
+      "Don’t ajouter de logo du journal ni de dépendance typographique distante.",
+      "Don’t appliquer le thème système aux commandes du site quand le thème effectif du site est différent.",
+      "Don’t transformer les lignes d’auteurs en cartes ombrées : la séparation observée repose sur des filets.",
+      "Don’t faire des captures synthétiques une preuve de compatibilité visuelle avec tous les états du site réel."
+    ]
+  }
+}

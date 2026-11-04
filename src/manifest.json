@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Bloqueur Le Monde",
+  "version": "1.0.0",
+  "minimum_chrome_version": "120",
+  "description": "Masquez les commentaires d’auteurs choisis sur Le Monde. Préférences locales, liste modifiable, sans envoi de données.",
+  "permissions": ["storage"],
+  "background": { "service_worker": "background.js", "type": "module" },
+  "content_scripts": [{
+    "matches": ["https://www.lemonde.fr/*"],
+    "js": ["content.js"], "css": ["content.css"],
+    "run_at": "document_idle", "world": "ISOLATED", "all_frames": false
+  }],
+  "action": { "default_title": "Gérer les auteurs masqués", "default_icon": { "16": "icons/16.png", "32": "icons/32.png" } },
+  "icons": { "16": "icons/16.png", "32": "icons/32.png", "48": "icons/48.png", "128": "icons/128.png" },
+  "options_ui": { "page": "options.html", "open_in_tab": true },
+  "content_security_policy": { "extension_pages": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" }
+}

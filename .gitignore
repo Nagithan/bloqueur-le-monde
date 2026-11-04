@@ -1,5 +1,7 @@
 .DS_Store
-.impeccable/
+.impeccable/*
+!.impeccable/design.json
+!.impeccable/surfaces/
 
 # Pièces d'audit locales, captures de la session et paquets tiers.
 audit/
@@ -14,6 +16,7 @@ node_modules/
 dist/
 build/
 output/
+release/
 coverage/
 *.log
 *.zip

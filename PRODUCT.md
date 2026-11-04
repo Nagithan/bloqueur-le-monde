@@ -11,7 +11,7 @@ La réussite se mesure à une lecture plus sereine : un blocage prend effet imm�
 - Mode principal : **Operate**, pour le blocage et les réglages.
 - Dans les articles : identité visuelle du site Le Monde déjà chargé, son bouton « Signaler », ses typographies et son thème effectif.
 - Dans les options : interface sobre, cohérente avec ces usages, portant clairement la mention « Extension indépendante ».
-- Le présent cadrage ne définit pas de nouvelle identité graphique et ne produit pas encore de maquette ou d’interface.
+- Le produit conserve cette autorité visuelle. Les interfaces et captures de la version 1.0.0 emploient des contenus de démonstration pour la recette, sans reprendre de textes d’abonnés.
 
 ## Contraintes établies
 
@@ -24,4 +24,4 @@ La réussite se mesure à une lecture plus sereine : un blocage prend effet imm�
 
 ## Périmètre de livraison
 
-Le cahier des charges dans `docs/CAHIER_DES_CHARGES.md` est une proposition de référence. Les points techniques non vérifiés y sont distingués des exigences. La création de la présente documentation n’équivaut pas à une validation d’une extension fonctionnelle ou d’une publication.
+Le cahier des charges dans `docs/CAHIER_DES_CHARGES.md` est la référence fonctionnelle. Les points techniques non vérifiés y sont distingués des exigences. La recette de la version 1.0.0 et ses limites sont décrites dans `docs/RECETTE.md`. La préparation du paquet et du dossier Store ne constitue pas une autorisation de soumission ou de publication.

@@ -1,0 +1,13 @@
+[data-blm-hidden-leaf],.blm-hidden-part{display:none!important}
+.blm-block-button{appearance:none;border:0;background:transparent;box-shadow:none;color:inherit;font:inherit;line-height:1.4;cursor:pointer;padding:0;margin:0 12px 0 0;white-space:normal;text-align:left;text-decoration:none;vertical-align:baseline;flex-shrink:1}
+.blm-block-button:hover{text-decoration:underline;text-underline-offset:3px}
+.blm-block-button:focus-visible,.blm-summary button:focus-visible,.blm-placeholder button:focus-visible,.blm-account-link:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.blm-summary,.blm-placeholder{font-family:var(--font-marr-sans,Arial,sans-serif);font-size:14px;line-height:1.5;color:var(--blm-fg,#263244);background:var(--blm-bg,#f5f6f8);box-sizing:border-box}
+.blm-summary{padding:16px;margin:0 0 20px;border:1px solid var(--blm-line,#d7dce2);border-radius:3px;max-width:100%;overflow-wrap:anywhere}
+.blm-summary p{margin:0 0 8px;font:inherit}
+.blm-summary p:last-child{margin-bottom:0}
+.blm-summary .blm-summary-actions{display:flex;flex-wrap:wrap;gap:8px 18px}
+.blm-summary button,.blm-placeholder button,.blm-account-link{appearance:none;color:var(--blm-link,#075ba7);background:transparent;border:0;padding:2px 0;font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.blm-placeholder{padding:10px 12px;margin-bottom:10px;border-radius:3px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.blm-account-link{font-family:var(--font-marr-sans,Arial,sans-serif);font-size:14px;display:block;margin:10px 0}
+@media(max-width:400px){.blm-block-button{margin-right:8px}.blm-summary{padding:12px}}

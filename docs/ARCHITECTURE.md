@@ -1,10 +1,10 @@
 # Architecture proposée
 
-Document de conception, 4 novembre 2026. Aucun des composants décrits ci-dessous n’est encore implémenté.
+Architecture de la version 1.0.0, 4 novembre 2026. Les composants principaux sont implémentés ; les preuves de recette et limites sont décrites dans `RECETTE.md`.
 
 ## 1. Socle
 
-Extension Chrome Manifest V3 en TypeScript, avec HTML/CSS pour les interfaces. Un bundler léger produit des fichiers JavaScript et CSS locaux ; aucune bibliothèque d’interface ou dépendance réseau n’est nécessaire au départ. Les versions de dépendances seront figées par un lockfile lors de l’implémentation.
+Extension Chrome Manifest V3 en TypeScript, avec HTML/CSS pour les interfaces. esbuild produit des fichiers JavaScript et CSS locaux ; aucune bibliothèque d’interface ou dépendance réseau n’est embarquée à l’exécution. Les dépendances de développement sont figées dans `package-lock.json`. Sharp produit les icônes à partir du SVG original.
 
 TypeScript est utile pour les messages, les règles d’auteur, les migrations et les états de l’interface. Il ne remplace pas la validation à l’exécution des données importées, du DOM ou des messages.
 
@@ -89,7 +89,7 @@ Après une écriture, envoyer l’état confirmé et sa révision aux interfaces
 
 Utiliser `chrome.storage.local.setAccessLevel({ accessLevel: "TRUSTED_CONTEXTS" })` pour réserver l’accès direct au stockage aux contextes internes. Les content scripts reçoivent ce dont ils ont besoin par la messagerie isolée et ne lisent pas directement cette API. Cette protection renforce la séparation des responsabilités ; elle ne cache pas au site les effets du masquage sur le DOM.
 
-Les préférences ne sont pas exposées à la page par `window.postMessage`, `CustomEvent`, `data-*` ou variables globales. Les pseudos sont rendus par `textContent`, jamais par insertion de HTML fourni par un auteur.
+Les préférences ne sont pas exposées à la page par `window.postMessage`, `CustomEvent`, `data-*` ou variables globales. Les pseudos sont rendus par `textContent`, jamais par insertion de HTML fourni par un auteur. Le gestionnaire volontairement ouvert dans la page affiche des préférences dans le DOM partagé : elles deviennent observables tant que cette interface est présente. Les événements synthétiques de la page ne sont pas acceptés comme commandes d’écriture de cette interface. Un instantané inchangé ne reconstruit pas les contrôles lors d’un retour de focus.
 
 ## 6. Suivi du DOM
 
@@ -127,10 +127,11 @@ Chaque mise à jour compare les versions pour expliquer les changements. Une exc
 src/
   background/        # messages, écritures, migrations et notifications
   content/
-    adapters/        # DOM du Monde et identité de la discussion
-    rendering/       # masquage, compteur, actions et restauration
-    ui/              # confirmation et gestion dans la page
+    adapter.ts       # DOM du Monde et identité de la discussion
+    index.ts         # masquage, compteur, actions et restauration
+    ui.ts            # confirmation et gestion dans la page
   core/              # identités, priorités, schémas et modèle pur
+  shared/            # client, gestionnaire, modales et styles communs
   options/           # réglages autonomes
 data/
   community-list.json
@@ -140,7 +141,7 @@ tests/
 docs/
 ```
 
-Ce schéma est une cible, pas un ensemble de fichiers déjà créés. Aucun manifeste installable ne sera ajouté avec des références vers des fichiers inexistants.
+Le manifeste source est `src/manifest.json`. Le build vérifie la liste, assemble les entrées et copie les ressources requises dans `dist/` ; `scripts/check-package.mjs` contrôle l’inventaire et les permissions du résultat. Le manifeste ne référence pas de fichier absent.
 
 ## 10. Validation et distribution
 
