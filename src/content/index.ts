@@ -3,7 +3,7 @@ import type { Snapshot } from '../core/model.ts';
 import { Client } from '../shared/client.ts';
 import { button, el } from '../shared/dom.ts';
 import { closeModal } from '../shared/modal.ts';
-import { DISCUSSION_SELECTOR, ROOT_SELECTOR, getDiscussion, getList, readComment, themeOf } from './adapter.ts';
+import { DISCUSSION_SELECTOR, ROOT_SELECTOR, getDiscussion, getList, own, readComment, themeOf } from './adapter.ts';
 import type { CommentView } from './adapter.ts';
 import { blockComment, dismissToast, openManager, toast } from './ui.ts';
 
@@ -28,7 +28,6 @@ function start(): void {
   const schedule = () => { if (processing) { rerender = true; return; } if (!stopped && timer === undefined) timer = setTimeout(() => { timer = undefined; void render(); }, 30); };
   const isOwned = (node: Node) => { const element = node instanceof Element ? node : node.parentElement; return !!element?.closest('[data-blm-owned],[data-blm-ui]'); };
   observer = new MutationObserver(records => {
-    if (processing) return;
     for (const record of records) {
       if (isOwned(record.target)) continue;
       const target = record.target instanceof Element ? record.target : record.target.parentElement;
@@ -86,7 +85,7 @@ function start(): void {
             root.prepend(placeholder);
           }
         }
-        let previous = root.querySelector<HTMLButtonElement>('.blm-block-button');
+        let previous: HTMLButtonElement | null = own<HTMLButtonElement>(root, '.blm-block-button')[0] ?? null;
         if (previous && !boundButtons.has(previous)) { previous.remove(); previous = null; }
         if (snapshot.state.settings.enabled && view.report) {
           if (!previous) {
@@ -97,7 +96,13 @@ function start(): void {
             view.report.before(block);
           } else { previous.setAttribute('aria-label', `Bloquer cet utilisateur : ${view.author.name}`); const native = nativeStyles.get(view.report.className); if (native) { previous.style.font = native.font; previous.style.color = native.color; } if (previous.nextElementSibling !== view.report) view.report.before(previous); }
         } else previous?.remove();
-        if (index > 0 && index % 150 === 0) await new Promise<void>(resolve => setTimeout(resolve, 0));
+        if (index > 0 && index % 150 === 0) {
+          // Observe host changes while yielding. A same-size rebuild or author change
+          // must schedule another pass even when the number of comments is unchanged.
+          observer.observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['data-active', 'data-comment-id', 'data-author-id', 'data-count', 'class', 'data-theme', 'data-color-scheme', 'aria-hidden'], characterData: true });
+          await new Promise<void>(resolve => setTimeout(resolve, 0));
+          observer.disconnect();
+        }
       }
       for (const [root] of views) if (!current.has(root) || !root.isConnected) { restore(root); views.delete(root); }
       updateSummary(hiddenIds.size, hiddenAuthors.size);

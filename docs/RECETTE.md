@@ -5,7 +5,7 @@
 ## Environnements et preuves
 
 - Node.js 24.22.1, macOS arm64 ; Chromium de test 153.0.8010.12, lancé avec un profil temporaire et le paquet réel `dist/`.
-- `npm run check` : typage strict, 10 tests du modèle, contrôle du paquet, 26 scénarios d’intégration et banc de charge. Résultats détaillés sous `output/test-results/`, exclus de Git. La CI refait ces vérifications sous Ubuntu avec le Chromium de la version verrouillée de Playwright.
+- `npm run check` : typage strict, 10 tests du modèle, contrôle du paquet, 28 scénarios d’intégration et banc de charge. Résultats détaillés sous `output/test-results/`, exclus de Git. Une première exécution CI Ubuntu a réussi : [run 41762494072](https://github.com/Nagithan/bloqueur-le-monde/actions/runs/41762494072). La CI refait ces vérifications avec le Chromium de la version verrouillée de Playwright ; consulter le résultat du commit livré.
 - Fixtures minimales au format des composants publics actuels du site, auteurs et textes fictifs. Aucun profil, cookie ou contenu d’abonné copié. Les réponses réseau de pages de test sont remplacées par ces fixtures ; les requêtes inattendues sont bloquées.
 - Revue visuelle des options, confirmations et gestion intégrée en clair/sombre et sur petit écran. Les quatre corrections de finition sont validées : ajout avec aperçu et doublons, annulation d’import, intégration sombre et cadrage des captures Store.
 
@@ -19,7 +19,7 @@ Les tests du paquet sur fixtures prouvent son fonctionnement dans le navigateur,
 | R02 | Annulation, Échap et focus | Intégration réussie, fenêtre native simulée conservée ; cohabitation réelle à vérifier. |
 | R03 | Blocage et annulation | Intégration réussie sur le vrai paquet. |
 | R04 | Chargement tardif | Intégration réussie après ajout de commentaires au DOM. |
-| R05 | Remplacement/réouverture | Intégration réussie, commandes sans doublons. |
+| R05 | Remplacement/réouverture | Intégration réussie, commandes sans doublons ; action parent tardive et changement d’auteur pendant les pauses de traitement couverts. |
 | R06 | Réponses d’autres auteurs | Parent masqué et réponse conservée en intégration. |
 | R07 | Identité exacte | Modèle et intégration réussis pour normalisation, pseudonymes proches et priorités. Aucun identifiant stable d’auteur établi sur le site. |
 | R08 | Exception communautaire | Modèle et intégration réussis ; les données personnelles sont séparées du paquet communautaire. |
@@ -44,7 +44,7 @@ La sélection native d’un choix depuis le gestionnaire intégré doit être v�
 
 ## Charge
 
-Cinq essais avec 1 000 commentaires et 5 000 règles ont donné 62, 75, 59, 58 et 59 ms, planification et interrogation du banc comprises. Le percentile empirique à 95 % de ces cinq essais vaut donc 75 ms sur la machine de référence. Ce petit échantillon ne prédit pas tous les appareils. Le gestionnaire ne crée que 100 lignes à la fois.
+Cinq essais avec 1 000 commentaires et 5 000 règles ont donné 71, 74, 70, 72 et 89 ms, planification et interrogation du banc comprises. Le percentile empirique à 95 % de ces cinq essais vaut donc 89 ms sur la machine de référence. Ce petit échantillon ne prédit pas tous les appareils. Le gestionnaire ne crée que 100 lignes à la fois.
 
 Le budget visé de 100 ms est atteint dans cette mesure. Le garde-fou du test portable est de 2 000 ms pour détecter les régressions majeures sur des machines CI variables. La durée maximale des tâches JavaScript n’a pas été profilée séparément ; le rendu est découpé en lots de 150 commentaires.
 

@@ -41,7 +41,7 @@ Les tests d’intégration lancent Chromium avec un profil temporaire et le paqu
 
 Si un Chromium de Playwright est déjà présent sur macOS, le banc peut l’utiliser ; sa version exacte figure dans le rapport. La variable `BLM_CHROMIUM` permet de choisir explicitement un binaire de test. La CI installe celui correspondant à la version verrouillée de Playwright.
 
-Le ZIP est écrit sous `release/bloqueur-le-monde-1.0.0.zip`, accompagné de `SHA256SUMS.txt`. Sa structure, ses dates ZIP et les permissions de fichiers sont déterministes. Les dépendances npm sont uniquement des dépendances de développement ; les scripts et interfaces livrés fonctionnent sans serveur.
+Le ZIP est écrit sous `release/bloqueur-le-monde-1.0.0.zip`, accompagné de `SHA256SUMS.txt`. Un second ZIP, `release/dossier-chrome-web-store-1.0.0.zip`, réunit le paquet, les textes de soumission, l’icône et les captures de démonstration. Décompresser ce dossier avant utilisation : il ne se charge pas lui-même comme extension. Les dates ZIP, l’ordre et les permissions de fichiers sont déterministes. Les dépendances npm sont uniquement des dépendances de développement ; les scripts et interfaces livrés fonctionnent sans serveur.
 
 ## Captures de démonstration
 

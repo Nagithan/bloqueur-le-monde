@@ -6,6 +6,7 @@ La publication Chrome Web Store attend la validation explicite de l’utilisateu
 
 - `release/bloqueur-le-monde-1.0.0.zip` : paquet complet, manifeste à la racine.
 - `release/SHA256SUMS.txt` : empreinte du ZIP.
+- `release/dossier-chrome-web-store-1.0.0.zip` : ensemble des pièces ci-dessous et du paquet. Décompresser ce dossier ; seul `bloqueur-le-monde-1.0.0.zip` est destiné au chargeur du Store.
 - `dist/icons/128.png` : icône du Store, issue du SVG original.
 - `store/assets/01-commentaires-1280x800.png` : filtrage et réponses conservées, données fictives.
 - `store/assets/02-reglages-1280x800.png` : gestion des préférences.

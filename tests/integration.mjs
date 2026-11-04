@@ -56,6 +56,16 @@ try {
   await block('Auteur calme'); await hidden('calm-1');
   const toast = page.locator('.toast'); await toast.getByRole('button', { name: 'Annuler', exact: true }).click(); await hidden('calm-1', false);
   record('R03 : blocage, vraie disparition et annulation');
+  // A parent's action arriving late must not borrow a reply's button and bound author.
+  await root('parent-1').evaluate(node => { node.querySelector('.blm-block-button')?.remove(); node.querySelector('.ds-comment-meta__link--report')?.remove(); });
+  await pause();
+  await root('parent-1').evaluate(node => { const report = document.createElement('a'); report.className = 'ds-comment-meta__link--report'; report.href = 'mailto:moderation@example.test'; report.textContent = 'Signaler'; node.querySelector('.ds-comment-meta__right').append(report); });
+  await pause();
+  await page.getByRole('button', { name: 'Bloquer cet utilisateur : Auteur du fil', exact: true }).click();
+  await page.getByRole('dialog', { name: 'Masquer ce commentaire et tous les futurs commentaires de cet auteur ?' }).getByText('Auteur du fil', { exact: true }).waitFor();
+  await page.keyboard.press('Escape');
+  assert.equal(await root('reply-1').locator('.blm-block-button').count(), 1);
+  record('R05/R06 : une action parent tardive conserve la bonne identité et le bouton de réponse');
   await block('Auteur du fil'); await pause();
   assert.equal(await root('parent-1').locator('.ds-comment__content').first().isVisible(), false); assert.equal(await root('reply-1').locator('.ds-comment__content').isVisible(), true);
   record('R06 : réponse d’un autre auteur conservée');
@@ -150,6 +160,18 @@ try {
   await page.evaluate(() => { const node = document.querySelector('[data-comment-id="late-2"]'); node.parentElement.append(node.cloneNode(true)); }); await pause();
   assert.equal(await page.locator('.blm-summary').getByText('3 commentaires masqués de 3 auteurs parmi les commentaires chargés.', { exact: true }).count(), 1);
   record('R11 : compteur dédupliqué par commentaire chargé');
+  // Simulate the host changing an already-processed author during a chunk yield.
+  await page.evaluate(() => {
+    const list = document.querySelector('[data-element="comments-container"]');
+    const original = document.querySelector('[data-comment-id="calm-1"]');
+    const nodes = Array.from({ length: 350 }, (_, index) => { const node = original.cloneNode(true); node.dataset.commentId = `yield-${index}`; node.querySelector('.ds-comment-signature__name').textContent = 'Auteur variable'; node.querySelectorAll('.blm-block-button,textarea,.blm-placeholder').forEach(item => item.remove()); return node; });
+    const first = nodes[0];
+    const observer = new MutationObserver(() => { if (first.querySelector('.blm-block-button')) { observer.disconnect(); first.querySelector('.ds-comment-signature__name').textContent = 'Peps72'; } });
+    observer.observe(list, { childList: true, subtree: true });
+    list.replaceChildren(...nodes);
+  });
+  await hidden('yield-0');
+  record('R04/R05 : changement d’auteur pendant un traitement par lots sans changement de nombre');
   const outside = await context.newPage(); await outside.goto('https://example.org/'); assert.equal(await outside.locator('.blm-block-button,[data-blm-owned]').count(), 0); await outside.close(); record('R17 : aucune injection sur un autre domaine');
   await page.getByRole('button', { name: 'Structure inconnue', exact: true }).click(); await pause(); assert.equal(await page.getByText('Contenu dont la structure n’est pas reconnue.').isVisible(), true); assert.equal(consoleErrors.length, 0); record('R22 : structure inconnue laissée intacte');
   await page.getByRole('button', { name: 'Changer le tri', exact: true }).click(); await pause();
