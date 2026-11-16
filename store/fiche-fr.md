@@ -16,10 +16,10 @@ Un bouton « Bloquer cet utilisateur » apparaît à côté de « Signaler ». A
 
 Vous gardez le contrôle :
 
-- Annulez un blocage ou affichez temporairement les commentaires masqués.
-- Gérez les auteurs depuis la discussion ou les réglages de l’extension.
-- Choisissez « Toujours masquer », « Toujours afficher » ou « Suivre la communauté ».
-- Consultez le nombre de commentaires masqués parmi ceux chargés.
+- Annulez un blocage immédiatement après sa confirmation.
+- Ouvrez le même gestionnaire depuis « Votre compte », le bouton du navigateur ou les options Chrome.
+- Retirez un commentateur avec la corbeille ; les exceptions communautaires restent mémorisées.
+- Consultez le compteur dans le composant de bienvenue du Monde, sans panneau supplémentaire.
 - Conservez les réponses des autres auteurs sous un commentaire masqué.
 - Exportez et importez vos préférences dans un fichier local.
 

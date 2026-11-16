@@ -1,12 +1,12 @@
-# Dossier de publication 1.0.0
+# Dossier de publication 1.1.0
 
 La publication Chrome Web Store attend la validation explicite de l’utilisateur. Ne pas envoyer la version en revue ni la mettre en ligne automatiquement.
 
 ## Pièces préparées
 
-- `release/bloqueur-le-monde-1.0.0.zip` : paquet complet, manifeste à la racine.
+- `release/bloqueur-le-monde-1.1.0.zip` : paquet complet, manifeste à la racine.
 - `release/SHA256SUMS.txt` : empreinte du ZIP.
-- `release/dossier-chrome-web-store-1.0.0.zip` : ensemble des pièces ci-dessous et du paquet. Décompresser ce dossier ; seul `bloqueur-le-monde-1.0.0.zip` est destiné au chargeur du Store.
+- `release/dossier-chrome-web-store-1.1.0.zip` : ensemble des pièces ci-dessous et du paquet. Décompresser ce dossier ; seul `bloqueur-le-monde-1.1.0.zip` est destiné au chargeur du Store.
 - `dist/icons/128.png` : icône du Store, issue du SVG original.
 - `store/assets/01-commentaires-1280x800.png` : filtrage et réponses conservées, données fictives.
 - `store/assets/02-reglages-1280x800.png` : gestion des préférences.
@@ -16,7 +16,7 @@ La publication Chrome Web Store attend la validation explicite de l’utilisateu
 - `store/notes-test.md` : parcours pour la revue, sans transmission de compte abonné.
 - `PRIVACY.md`, `LICENSE`, `CONTRIBUTING.md` et `docs/RECETTE.md` dans le dépôt public.
 
-Le ZIP n’est pas suivi dans Git ; il est construit depuis les sources du tag. Les captures ne contiennent aucun texte de commentaire d’abonné. Les PNG utilisés par le paquet proviennent du SVG original ; les captures proviennent de la recette du paquet dans Chromium. La provenance est décrite dans `store/assets/provenance.json`.
+Le ZIP n’est pas suivi dans Git ; il est construit depuis les sources du dépôt. Les captures ne contiennent aucun texte de commentaire d’abonné. Les PNG utilisés par le paquet proviennent du SVG original ; les captures proviennent de la recette du paquet dans Chromium. La provenance est décrite dans `store/assets/provenance.json`.
 
 ## Étapes après validation
 

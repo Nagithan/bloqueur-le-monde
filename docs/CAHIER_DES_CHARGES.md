@@ -1,6 +1,6 @@
 # Cahier des charges — Bloqueur Le Monde
 
-Référence fonctionnelle du 4 novembre 2026. La version 1.0.0 est implémentée ; les résultats et limites de validation sont consignés dans [RECETTE.md](RECETTE.md).
+Référence fonctionnelle mise à jour le 16 novembre 2026 pour l’interface 1.1.0 ; les résultats et limites de validation sont consignés dans [RECETTE.md](RECETTE.md).
 
 ## 1. Finalité et périmètre
 
@@ -19,10 +19,10 @@ Chrome mobile, les applications natives du journal, Firefox, Safari, les publica
 | Code et diffusion | Implémentation originale, licence MIT, dépôt destiné à être public ; installation locale de développement puis Chrome Web Store après recette. |
 | Permissions | `storage` et injection statique sur `https://www.lemonde.fr/*` ; aucune permission sur tous les sites ni sur tous les sous-domaines. |
 | Stockage | `chrome.storage.local`, sans synchronisation Google ni stockage dans le site. |
-| Liste fournie | Liste communautaire incluse dans le paquet, active par défaut, signalée à la première utilisation, désactivable globalement ou auteur par auteur. |
+| Liste fournie | Liste communautaire incluse dans le paquet, active par défaut, désactivable globalement ou commentateur par commentateur. |
 | Liste initiale | Pseudonyme exact `Peps72`, à titre de préférence fournie pour ce projet ; aucun jugement factuel sur la personne n’est attaché à cette entrée. |
 | Priorité | Les choix personnels priment sur la liste communautaire ; les exceptions sont préservées lors des mises à jour. |
-| Réglages | Page d’options de l’extension, gestion accessible depuis la zone de commentaires et raccourci local dans « Votre compte » sur `www.lemonde.fr`. |
+| Réglages | Gestionnaire unique sur Le Monde ; « Votre compte », le bouton du navigateur et les options Chrome ouvrent cette même interface. |
 | Compte Le Monde | Les choix restent propres au profil Chrome, même lorsqu’ils sont accessibles depuis l’interface du compte. |
 | Actualisation communautaire | Nouvelles versions de l’extension après revue GitHub ; aucun téléchargement silencieux d’une liste distante. |
 
@@ -76,7 +76,7 @@ Enregistrer d’abord le choix. Après confirmation de l’écriture, masquer to
 
 Afficher un retour discret : « Les commentaires de [pseudonyme] sont masqués. Annuler ». L’action d’annulation reste disponible au moins dix secondes et par le gestionnaire après ce délai. Elle restaure le choix personnel précédent, sans affecter les autres auteurs.
 
-Pour un auteur déjà masqué par la communauté, l’action « Toujours afficher cet auteur » crée une exception personnelle. Il ne suffit pas de supprimer une entrée de la liste personnelle : l’exception doit empêcher le retour du masquage communautaire.
+Pour un auteur déjà masqué par la communauté, la corbeille dans le gestionnaire crée une exception personnelle. Il ne suffit pas de supprimer une entrée de la liste personnelle : l’exception doit empêcher le retour du masquage communautaire.
 
 ## 5. Masquage, réponses et compteur
 
@@ -84,50 +84,29 @@ Pour un auteur déjà masqué par la communauté, l’action « Toujours affiche
 
 Masquer réellement le contenu propre au commentaire, son auteur et ses actions, en retirant ces éléments de l’affichage et de l’arbre d’accessibilité. Une baisse d’opacité ne répond pas au besoin.
 
-Les réponses d’autres auteurs restent accessibles. Il est donc interdit de masquer aveuglément le conteneur racine d’un fil si celui-ci contient aussi leurs réponses. Si un repère est nécessaire pour préserver le fil, utiliser un élément compact « Commentaire masqué », sans pseudonyme ni extrait, avec possibilité de l’afficher ponctuellement.
+Les réponses d’autres auteurs restent accessibles. Il est donc interdit de masquer aveuglément le conteneur racine d’un fil si celui-ci contient aussi leurs réponses. Ne pas ajouter de repère ni de commande de révélation pour les commentaires masqués.
 
 Le masquage ne supprime pas un brouillon de réponse en cours. La restauration rétablit les éléments et interactions natifs. L’état de la page doit pouvoir être restauré même si le site a remplacé certains nœuds entre-temps.
 
-### 5.2. Encart au début de la discussion
+### 5.2. Compteur dans le composant existant
 
-Dès qu’au moins un commentaire est masqué, afficher avant la liste des contributions :
+Remplacer le contenu du message de bienvenue du Monde, identifié par son composant et jamais par son texte. Afficher uniquement « 7 commentaires masqués · 2 commentateurs », avec les classes typographiques natives. Ne pas ajouter de panneau si le composant manque. La désactivation restaure le contenu d’origine.
 
-> 7 commentaires masqués de 2 auteurs parmi les commentaires chargés.
+Compter les commentaires distincts actuellement chargés dans la discussion active, réponses comprises, en dédupliquant les identifiants. Le compteur est recalculé après chargement, tri, réponses, préférences et navigation ; il peut afficher zéro et ne modifie pas le total natif. Les réponses non chargées et les autres articles restent hors du calcul. Aucun bouton de gestion ou de révélation n’accompagne le compteur.
 
-Proposer **« Gérer les auteurs »** et **« Afficher temporairement »**. Gérer ouvre l’éditeur local sur la page ou la page d’options en repli. Le compteur porte sur des commentaires, réponses comprises, et non uniquement sur des auteurs.
+## 6. Réglages et gestion des commentateurs
 
-Compter les commentaires distincts actuellement chargés dans la discussion active. Un commentaire présent deux fois dans le DOM n’est compté qu’une fois si son identifiant est disponible. Les réponses non chargées et les commentaires d’autres articles ne sont pas comptés. Si le site virtualise la liste, le nombre peut varier avec les éléments présents ; le libellé ne doit jamais suggérer le total de l’article.
+### 6.1. Gestionnaire unique
 
-Le compteur est recalculé après chargement, tri, ouverture de réponses, changement de préférences, restauration et navigation. Il disparaît lorsqu’il vaut zéro. Il n’altère pas le total natif du Monde.
+Les options Chrome redirigent vers le gestionnaire intégré au Monde. Le bouton du navigateur l’ouvre dans l’onglet du Monde actif ou ouvre le site si nécessaire.
 
-« Afficher temporairement » révèle les commentaires de cette discussion sans modifier les préférences. L’action devient « Masquer à nouveau ». Cette dérogation s’arrête à la fermeture de la zone ou au changement d’article. « Toujours afficher cet auteur » reste une action distincte et persistante.
+Le gestionnaire présente l’activation générale, l’interrupteur communautaire, une liste recherchable de pseudonymes avec corbeille, l’ajout exact avec aperçu et détection des doublons, l’import/export et la réinitialisation confirmée. La corbeille retire une règle personnelle ou crée une exception communautaire persistante. Ajouter à nouveau un pseudonyme retiré permet de le masquer de nouveau. Les anciennes exceptions restent respectées.
 
-## 6. Réglages et gestion des auteurs
+Retirer les explications répétées, les indications de provenance par ligne, les versions affichées, l’historique et le réglage d’apparence. Le thème et les polices suivent toujours le Monde. Conserver les noms accessibles des icônes, les messages d’erreur et les confirmations nécessaires.
 
-### 6.1. Page d’options
+### 6.2. Menu du compte
 
-La page d’options est la référence et reste utilisable même si la structure du site change. Elle est accessible depuis Chrome et depuis le bouton de l’extension.
-
-Elle fournit :
-
-- L’activation générale du filtrage, sans effacer les listes.
-- Une liste recherchable avec pseudonyme, mode d’identification et provenance « Personnel » ou « Communautaire ».
-- L’ajout manuel d’un pseudonyme exact, avec validation, aperçu et détection des doublons.
-- Trois états par auteur : « Suivre la liste communautaire », « Toujours masquer », « Toujours afficher ».
-- L’interrupteur de la liste communautaire, sa version et les modifications apportées depuis la version précédente.
-- La suppression d’un choix personnel et le rétablissement explicite du comportement communautaire.
-- L’export et l’import d’un fichier JSON, ainsi que l’effacement des données avec confirmation.
-- Une explication du stockage local, de la portée par profil et de l’indépendance vis-à-vis du Monde.
-
-L’état vide explique comment ajouter un auteur. Les messages de résultat ne reposent pas uniquement sur la couleur. Un pseudonyme très long reste consultable sans casser la mise en page.
-
-### 6.2. Gestion dans Le Monde
-
-L’encart de la discussion ouvre une interface locale permettant les mêmes changements essentiels : chercher un auteur, ajouter un pseudonyme, changer son état et activer/désactiver la communauté. Elle utilise le même modèle de données que les options, sans duplication de stockage.
-
-Ajouter si possible dans « Votre compte », sur `www.lemonde.fr`, un raccourci **« Auteurs masqués — extension »**. Il ouvre le gestionnaire de l’extension, et ne se présente pas comme une fonction native ou un réglage serveur du compte.
-
-L’intégration directement dans la page `compte.lemonde.fr` est une amélioration ultérieure, après inspection, avec accès optionnel ciblé sur ce sous-domaine. La première version ne demande pas par avance l’accès à l’espace de compte, aux pages de connexion ou aux autres sous-domaines.
+Le raccourci **« Commentateurs masqués (Extension) »** suit l’en-tête de « Votre compte ». Utiliser les classes et la structure natives du menu pour les polices, graisse, couleur, dimensions et survol. Il ouvre le même gestionnaire et ne change pas le compte serveur. Aucun accès à `compte.lemonde.fr` n’est ajouté.
 
 ### 6.3. Import, export et mises à jour
 
@@ -143,9 +122,9 @@ Une migration de version conserve les règles personnelles, les exceptions et le
 
 La liste initiale contient `Peps72`, fourni comme choix de filtrage. Aucune étiquette telle que « toxique », aucun classement de personnes et aucune accusation ne font partie du produit ou des données.
 
-La liste est incluse dans le paquet distribué, versionnée et active par défaut conformément à la demande. Lors de la première utilisation, une information distincte du compteur indique : « Liste communautaire active : 1 pseudonyme. Consulter · Désactiver ». Cette information est présentée même si aucun commentaire correspondant n’est chargé. Aucun onglet externe n’est ouvert automatiquement.
+La liste est incluse dans le paquet distribué, versionnée et active par défaut conformément à la demande. Son interrupteur reste visible dans le gestionnaire ; aucun panneau d’information supplémentaire n’est ajouté à la discussion.
 
-Le lecteur peut désactiver la liste entière ou choisir « Toujours afficher » pour une entrée. Une mise à jour n’annule jamais ces choix. Le filtrage personnel continue lorsque la communauté est désactivée.
+Le lecteur peut désactiver la liste entière ou retirer une entrée avec la corbeille. Une mise à jour n’annule jamais ces choix. Le filtrage personnel continue lorsque la communauté est désactivée.
 
 ### 7.2. Contributions
 
@@ -159,7 +138,7 @@ La recette de publication vérifie le schéma, l’unicité et le diff de la lis
 
 ### 7.3. Mises à jour
 
-La publication d’une version applique la nouvelle liste aux installations mises à jour dont le filtrage communautaire est activé. Une information locale résume les changements à la prochaine utilisation ; les exceptions restent prioritaires. Les ajouts ne sont pas téléchargés depuis GitHub pendant la lecture.
+La publication d’une version applique la nouvelle liste aux installations mises à jour dont le filtrage communautaire est activé. L’historique public documente les changements ; les exceptions restent prioritaires. Les ajouts ne sont pas téléchargés depuis GitHub pendant la lecture.
 
 Un abonnement à des listes externes ou une mise à jour indépendante du paquet pourra être étudié plus tard. Ce serait une évolution de confidentialité et de maintenance, pas un détail d’implémentation à introduire silencieusement.
 
@@ -173,13 +152,13 @@ Une règle par identifiant garde un libellé de pseudonyme pour l’interface. L
 
 Pour chaque commentaire, appliquer dans cet ordre :
 
-1. Filtrage désactivé ou affichage temporaire de la discussion : afficher.
+1. Filtrage désactivé : afficher.
 2. Choix personnel pour l’identifiant stable, s’il existe : afficher ou masquer selon ce choix.
 3. Choix personnel pour le pseudonyme exact : afficher ou masquer selon ce choix.
 4. Liste communautaire activée et règle correspondante par identifiant ou pseudonyme : masquer.
 5. Sinon : afficher.
 
-Ainsi, un choix personnel « Toujours afficher » est prioritaire sur la communauté. Un choix personnel par identifiant est plus précis qu’une règle personnelle par pseudonyme. Le gestionnaire explique les règles qui se recoupent et celle qui s’applique.
+Ainsi, un choix personnel « Toujours afficher » est prioritaire sur la communauté. Un choix personnel par identifiant est plus précis qu’une règle personnelle par pseudonyme. Le moteur conserve ces priorités sans ajouter de contrôles par règle.
 
 Si seule une règle par pseudonyme est possible, deux comptes homonymes sont concernés ; un auteur qui change de pseudonyme peut ne plus être reconnu. L’extension ne promet pas de suivre une personne au-delà des informations réellement disponibles.
 
@@ -189,7 +168,7 @@ Le chargement à l’ouverture de la zone, les réponses différées, le changem
 
 En cas de structure inconnue, afficher les commentaires normalement et signaler dans l’extension qu’elle n’a pas reconnu la zone. Ne pas déduire un auteur depuis le texte de son commentaire. Si la barre d’actions seule manque, continuer le filtrage des auteurs identifiés, et conserver l’ajout manuel dans les options.
 
-Respecter le thème réellement affiché par le site, y compris si celui-ci diffère du thème système. Si le site ne fournit pas de thème sombre, ne pas en imposer un. Les options autonomes peuvent suivre le système et offrir un choix clair/sombre. Réutiliser les polices déjà chargées et les couleurs disponibles, avec replis locaux ; ne pas embarquer de logo ou de police du Monde.
+Respecter le thème réellement affiché par le site, y compris si celui-ci diffère du thème système. Si le site ne fournit pas de thème sombre, ne pas en imposer un. Le gestionnaire intégré suit également ce thème, sans choix local. Réutiliser les polices déjà chargées et les couleurs disponibles, avec replis locaux ; ne pas embarquer de logo ou de police du Monde.
 
 Toutes les actions sont accessibles au clavier avec focus visible, libellés explicites et annonces de résultat sobres. Viser WCAG 2.2 AA pour les éléments ajoutés ; vérifier les contrastes, le zoom à 200 %, la largeur de 320 px, les noms longs et un lecteur d’écran. Les commentaires masqués ne sont pas lus par celui-ci.
 
@@ -208,11 +187,11 @@ Limiter l’apparition fugace d’un commentaire destiné à être masqué. Un c
 | R05 | Tri, réouverture ou remplacement du DOM | Pas de doublon, choix et compteur cohérents. |
 | R06 | Parent masqué et réponses d’autres auteurs | Réponses conservées ; aucun contenu du parent révélé par erreur. |
 | R07 | Auteur homonyme ou pseudonyme proche | Correspondance conforme au mode annoncé ; aucun filtrage partiel. |
-| R08 | « Toujours afficher » sur une entrée communautaire | Commentaires restaurés immédiatement et exception conservée après mise à jour. |
+| R08 | Corbeille sur une entrée communautaire | Commentaires restaurés immédiatement et exception conservée après mise à jour. |
 | R09 | Désactivation de la communauté | Seules les règles personnelles continuent à masquer. |
 | R10 | Nouvelle liste communautaire | Ajouts/retraits appliqués selon réglages ; choix personnels inchangés ; diff consultable. |
 | R11 | Compteur avec réponses et doublons de DOM | Nombre de commentaires distincts chargés, et non total fictif de l’article. |
-| R12 | Affichage temporaire | Préférences inchangées ; filtrage rétabli à la fermeture ou au changement d’article. |
+| R12 | Absence de révélation | Aucun bouton de révélation globale ou individuelle ; masquage conservé après fermeture et réouverture. |
 | R13 | Modification depuis options ou autre onglet | Affichage des onglets concernés mis à jour après confirmation d’écriture. |
 | R14 | Import invalide, trop grand ou conflit de version | Explication exploitable, aucune modification partielle des données. |
 | R15 | Import valide ou retrait d’une règle | Affichage et compteur recalculés ; anciens styles correctement restaurés. |

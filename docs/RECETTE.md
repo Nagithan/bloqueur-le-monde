@@ -1,3 +1,17 @@
+# Recette de la version 1.1.0
+
+Vérifications du 16 novembre 2026 : 10 tests du moteur, 19 scénarios d’intégration du paquet réel, axe sans violation en clair/sombre, largeur 320 px, import/export, exceptions persistantes après suppression par corbeille, erreurs de stockage et modifications tardives du DOM. Le contrôle statique du paquet et du typage passe. Les rapports locaux détaillés se trouvent dans `output/test-results/`.
+
+Charge : cinq essais à 62, 74, 74, 61 et 70 ms pour 1 000 commentaires et 5 000 règles ; maximum empirique de 74 ms. Le gestionnaire limite le rendu à 100 lignes. Ces mesures sur la machine de développement ne prédisent pas toutes les machines.
+
+Les captures de démonstration des nouveaux parcours ont été vérifiées en clair sur ordinateur et en sombre sur mobile. La structure réelle du message de bienvenue (`data-element="welcome-message"`) et les classes du menu du compte ont été inspectées sur Le Monde. Le nouveau paquet a été testé dans un profil Chromium temporaire avec des fixtures synthétiques ; il n’a pas été installé dans le profil Brave personnel. L’installation personnelle existante utilise un dossier Téléchargements distinct de `dist/`.
+
+Le compteur remplace le contenu du composant natif sans rechercher sa formulation. Le gestionnaire intégré est désormais l’unique interface, y compris depuis les options Chrome ; les sélecteurs d’état, la section Apparence et les actions de révélation ont été retirés. Les préférences 1.0.0 sont conservées ; l’ancien champ de thème reste compatible avec les imports mais n’influence plus l’interface. Les tests axe ne constituent pas une certification d’accessibilité.
+
+Le [relevé 1.1.0](recette-1.1.0.json) consigne ces résultats. La recette historique ci-dessous concerne exclusivement la version 1.0.0 et ses anciens parcours.
+
+---
+
 # Recette de la version 1.0.0
 
 État au 4 novembre 2026 : version 1.0.0 prête à la diffusion, avec recette automatisée du paquet et recette manuelle sur deux articles du site réel. La publication Chrome Web Store attend la validation de l’éditeur.

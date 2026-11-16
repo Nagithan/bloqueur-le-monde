@@ -21,10 +21,10 @@ await context.route('**/*', route => {
 });
 try {
   const worker = context.serviceWorkers()[0] ?? await context.waitForEvent('serviceworker'); const id = new URL(worker.url()).host;
-  const options = await context.newPage(); await options.goto(`chrome-extension://${id}/options.html`); await options.getByRole('combobox', { name: 'Choix pour Peps72', exact: true }).waitFor();
+  const options = await context.newPage(); await options.goto(`chrome-extension://${id}/options.html`); await options.getByRole('button', { name: 'Ne plus masquer Peps72', exact: true }).waitFor();
   const state = { schemaVersion: 1, settings: { enabled: true, communityEnabled: false, theme: 'light' }, personalRules: Array.from({ length: 5000 }, (_, i) => ({ identity: { kind: 'displayName', value: `Charge ${i}` }, label: `Charge ${i}`, decision: 'block' })) };
   const file = { name: 'charge.json', mimeType: 'application/json', buffer: Buffer.from(JSON.stringify(state)) };
-  await options.locator('input[type=file]').setInputFiles(file); await options.getByRole('button', { name: 'Remplacer', exact: true }).click(); await options.getByRole('dialog', { name: 'Remplacer vos préférences ?', exact: true }).getByRole('button', { name: 'Remplacer', exact: true }).click();
+  const chooser = options.waitForEvent('filechooser'); await options.getByRole('button', { name: 'Importer', exact: true }).click(); await (await chooser).setFiles(file); await options.getByRole('button', { name: 'Remplacer', exact: true }).click(); await options.getByRole('dialog', { name: 'Remplacer vos préférences ?', exact: true }).getByRole('button', { name: 'Remplacer', exact: true }).click();
   await options.getByRole('status').filter({ hasText: 'Import terminé.' }).waitFor(); assert.equal(await options.locator('.rule-row').count(), 100);
   const page = await context.newPage(); await page.goto('https://www.lemonde.fr/charge'); await page.getByRole('button', { name: 'Voir les commentaires', exact: true }).click(); await page.getByRole('button', { name: 'Bloquer cet utilisateur : Auteur calme', exact: true }).waitFor();
   const samples = [];

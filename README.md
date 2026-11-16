@@ -2,9 +2,9 @@
 
 Projet d’extension Chrome indépendante pour masquer localement les commentaires d’auteurs choisis sur `www.lemonde.fr`.
 
-**Version 1.0.0, prête à la diffusion au 4 novembre 2026.** Extension Manifest V3 complète, compilable et installable localement, testée dans Chromium et sur deux discussions réelles du Monde dans Brave. La publication sur le Chrome Web Store reste soumise à la validation de l’éditeur ; aucune soumission automatique n’est effectuée.
+**Version 1.1.0 — interface simplifiée le 16 novembre 2026.** Extension Manifest V3 complète, compilable et installable localement, testée dans Chromium. Les sélecteurs hôtes ont été inspectés sur Le Monde ; la recette manuelle de la version 1.0.0 reste documentée. La publication sur le Chrome Web Store reste soumise à la validation de l’éditeur ; aucune soumission automatique n’est effectuée.
 
-Les ZIP de l’extension et du dossier Chrome Web Store sont disponibles dans la [release 1.0.0](https://github.com/Nagithan/bloqueur-le-monde/releases/tag/v1.0.0). Voir la [recette](docs/RECETTE.md) avant diffusion.
+La [release 1.0.0](https://github.com/Nagithan/bloqueur-le-monde/releases/tag/v1.0.0) reste disponible. Pour construire le paquet 1.1.0, utiliser `npm run package`. Voir la [recette](docs/RECETTE.md) avant diffusion.
 
 ## Installer ou construire
 
@@ -33,8 +33,9 @@ Node.js 24 et Python 3 sont nécessaires pour le développement. Le build se tro
 
 1. « Bloquer cet utilisateur » apparaît immédiatement à gauche de « Signaler ».
 2. Une confirmation précède l’enregistrement du choix et le masquage des commentaires de cet auteur, y compris ceux chargés plus tard.
-3. Un encart indique le nombre de commentaires masqués parmi ceux chargés dans la discussion et permet de gérer les auteurs ou d’afficher temporairement les commentaires.
-4. Une liste communautaire livrée avec l’extension est active par défaut, annoncée à la première utilisation et entièrement désactivable. Les exceptions personnelles restent prioritaires lors des mises à jour.
+3. Le message de bienvenue natif affiche uniquement le nombre de commentaires masqués et de commentateurs concernés, avec la typographie du Monde. Aucun bouton ne révèle les commentaires masqués.
+4. « Votre compte » → « Commentateurs masqués (Extension) » ouvre l’unique gestionnaire. Le bouton du navigateur et les options Chrome y conduisent aussi. Chaque pseudonyme peut être retiré avec une corbeille.
+5. La liste communautaire est active par défaut et désactivable. Retirer une entrée communautaire mémorise une exception prioritaire lors des mises à jour. Les réglages suivent toujours le thème du Monde.
 
 Le masquage concerne ce profil de navigateur. Il n’empêche pas un auteur de répondre et n’agit pas sur son compte Le Monde.
 

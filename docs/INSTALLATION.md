@@ -10,7 +10,7 @@
 
 L’extension demande l’accès à `https://www.lemonde.fr/*` et au stockage de ses préférences. Elle ne demande pas l’accès à tous les sites ni aux pages de compte sur d’autres sous-domaines.
 
-La liste communautaire est active par défaut et contient initialement `Peps72`. Elle est annoncée sur la page et désactivable depuis les réglages. Une exception « Toujours afficher » reste prioritaire. Cliquer sur l’icône de l’extension ouvre les réglages ; aucun abonnement additionnel à un service de l’extension n’est nécessaire.
+La liste communautaire est active par défaut et contient initialement `Peps72`. Elle est désactivable depuis les réglages. La corbeille retire un commentateur de la liste ; une exception communautaire reste prioritaire. Le menu « Votre compte » → « Commentateurs masqués (Extension) », les options Chrome et l’icône du navigateur ouvrent le même gestionnaire sur Le Monde ; aucun abonnement additionnel à un service de l’extension n’est nécessaire.
 
 Le mode développeur ne fournit pas les mises à jour automatiques du Store. Pour mettre à jour une installation locale, remplacer le dossier par la nouvelle version et utiliser « Actualiser » dans la page des extensions, puis recharger les onglets du Monde. Exporter ses préférences avant une désinstallation, car celle-ci supprime le stockage de l’extension.
 
@@ -41,7 +41,7 @@ Les tests d’intégration lancent Chromium avec un profil temporaire et le paqu
 
 Si un Chromium de Playwright est déjà présent sur macOS, le banc peut l’utiliser ; sa version exacte figure dans le rapport. La variable `BLM_CHROMIUM` permet de choisir explicitement un binaire de test. La CI installe celui correspondant à la version verrouillée de Playwright.
 
-Le ZIP est écrit sous `release/bloqueur-le-monde-1.0.0.zip`, accompagné de `SHA256SUMS.txt`. Un second ZIP, `release/dossier-chrome-web-store-1.0.0.zip`, réunit le paquet, les textes de soumission, l’icône et les captures de démonstration. Décompresser ce dossier avant utilisation : il ne se charge pas lui-même comme extension. Les dates ZIP, l’ordre et les permissions de fichiers sont déterministes. Les dépendances npm sont uniquement des dépendances de développement ; les scripts et interfaces livrés fonctionnent sans serveur.
+Le ZIP est écrit sous `release/bloqueur-le-monde-1.1.0.zip`, accompagné de `SHA256SUMS.txt`. Un second ZIP, `release/dossier-chrome-web-store-1.1.0.zip`, réunit le paquet, les textes de soumission, l’icône et les captures de démonstration. Décompresser ce dossier avant utilisation : il ne se charge pas lui-même comme extension. Les dates ZIP, l’ordre et les permissions de fichiers sont déterministes. Les dépendances npm sont uniquement des dépendances de développement ; les scripts et interfaces livrés fonctionnent sans serveur.
 
 ## Captures de démonstration
 

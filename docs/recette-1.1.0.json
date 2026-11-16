@@ -1,0 +1,36 @@
+{
+  "version": "1.1.0",
+  "date": "2026-11-16",
+  "automated": {
+    "modelTests": 10,
+    "integrationScenarios": 19,
+    "integrationChromium": "153.0.8010.12",
+    "allPassed": true,
+    "consoleErrors": 0,
+    "performance": {
+      "comments": 1000,
+      "rules": 5000,
+      "samplesMs": [
+        62,
+        74,
+        74,
+        61,
+        70
+      ],
+      "p95Ms": 74,
+      "includesSchedulingAndTestPolling": true,
+      "chromium": "153.0.8010.12",
+      "platform": "darwin/arm64",
+      "optionsRowsRendered": 100
+    }
+  },
+  "live": {
+    "componentSelectorsInspected": true,
+    "updatedPackageInstalledInPersonalBrowser": false
+  },
+  "limits": [
+    "Runtime and visual checks use synthetic discussion fixtures.",
+    "Native host selectors inspected on the current site; updated package not installed in the personal Brave profile.",
+    "No complete screen-reader audit or Store update migration performed."
+  ]
+}

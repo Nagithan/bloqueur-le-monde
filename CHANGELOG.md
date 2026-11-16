@@ -1,5 +1,15 @@
 # Historique
 
+## 1.1.0 — 16 novembre 2026
+
+- Compteur intégré au composant de bienvenue natif, sans dépendance à son texte et sans encart supplémentaire.
+- Suppression des commandes de révélation temporaire et individuelle.
+- Un seul gestionnaire sur Le Monde, accessible depuis le compte, le bouton du navigateur et les options Chrome.
+- Raccourci « Commentateurs masqués (Extension) » utilisant les classes et le survol natifs du menu.
+- Suppression des textes redondants, de l’historique et du réglage d’apparence ; thème et polices hérités du Monde.
+- Corbeilles à la place des menus de choix, avec exceptions communautaires persistantes et anciennes préférences conservées.
+- Tests et captures de démonstration adaptés aux nouveaux parcours.
+
 ## 1.0.0 — 4 novembre 2026
 
 - Première extension Manifest V3 originale : blocage confirmé, annulation et restauration locale des commentaires.

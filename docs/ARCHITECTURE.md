@@ -28,7 +28,7 @@ flowchart LR
 - **Rendu réversible** : ajouter les actions, masquer uniquement les parties requises, préserver les réponses et restaurer les éléments. Les modifications sont identifiées et nettoyées.
 - **Content script en monde isolé** : coordonner le suivi du DOM, les interfaces et le cache de règles pour l’article courant. Aucun script dans le monde principal de la page n’est nécessaire.
 - **Service worker** : initialiser/migrer l’état, valider les commandes, sérialiser les écritures et diffuser les nouvelles versions. Il ne lit pas les pages et n’effectue pas de requête réseau.
-- **Options et action Chrome** : l’action ouvre les options ; la page d’options fournit le gestionnaire complet. L’éditeur sur Le Monde partage le modèle et les commandes, sans recopier l’état.
+- **Options et action Chrome** : l’action envoie une commande au content script actif ou ouvre `https://www.lemonde.fr/#blm-settings`. Les options Chrome redirigent vers cette même route. Le gestionnaire unique est rendu sur le site, sans recopier l’état.
 
 Le petit worker est justifié par la cohérence des modifications provenant de plusieurs onglets et des options. Éviter plusieurs opérations concurrentes de lecture/modification/écriture sur une même liste dans différents content scripts.
 
@@ -99,7 +99,7 @@ Au premier instantané de règles, traiter les commentaires déjà présents. À
 
 Les sélecteurs sont centralisés dans un adaptateur testable. Rechercher des limites structurelles et des attributs stables plutôt que dépendre d’une position de `nextSibling`. L’identification conjointe de l’auteur, du commentaire et des actions doit être suffisamment sûre ; un simple texte « Signaler » trouvé ailleurs sur la page ne suffit pas.
 
-À la fermeture de la racine, libérer les références au DOM et supprimer l’affichage temporaire. À un changement d’article, réinitialiser le registre de commentaires, le compteur et les dérogations de session. Prévoir les navigations sans chargement complet : vérifier l’identité de discussion avec les mutations et les événements de navigation disponibles, sans modifier le code de routage du site.
+À la fermeture de la racine, libérer les références au DOM et restaurer le message de bienvenue natif. À un changement d’article, réinitialiser le registre de commentaires et le compteur. Prévoir les navigations sans chargement complet : vérifier l’identité de discussion avec les mutations et les événements de navigation disponibles, sans modifier le code de routage du site.
 
 Le registre privilégie les identifiants de commentaires s’ils existent, avec références DOM faibles pour le rendu. Compter les éléments connectés de la discussion courante et dédupliquer les IDs. Les bouts de texte ou les noms d’auteur ne sont pas des identifiants de commentaire.
 
@@ -132,7 +132,7 @@ src/
     ui.ts            # confirmation et gestion dans la page
   core/              # identités, priorités, schémas et modèle pur
   shared/            # client, gestionnaire, modales et styles communs
-  options/           # réglages autonomes
+  options/           # redirection vers le gestionnaire du site
 data/
   community-list.json
 tests/

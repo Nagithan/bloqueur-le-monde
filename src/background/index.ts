@@ -69,4 +69,11 @@ chrome.runtime.onConnect.addListener(port => {
     queue = queue.then(() => execute({ port, request })).catch(() => undefined);
   });
 });
-chrome.action.onClicked.addListener(() => { void chrome.runtime.openOptionsPage(); });
+chrome.action.onClicked.addListener(tab => {
+  void (async () => {
+    if (tab.id !== undefined) {
+      try { if (await chrome.tabs.sendMessage(tab.id, { type: 'blm-open-settings' })) return; } catch { /* No content script on this tab. */ }
+    }
+    await chrome.tabs.create({ url: 'https://www.lemonde.fr/#blm-settings' });
+  })();
+});

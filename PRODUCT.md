@@ -10,7 +10,7 @@ La réussite se mesure à une lecture plus sereine : un blocage prend effet imm�
 
 - Mode principal : **Operate**, pour le blocage et les réglages.
 - Dans les articles : identité visuelle du site Le Monde déjà chargé, son bouton « Signaler », ses typographies et son thème effectif.
-- Dans les options : interface sobre, cohérente avec ces usages, portant clairement la mention « Extension indépendante ».
+- Dans les réglages : un seul gestionnaire intégré au Monde, accessible depuis le compte et le bouton du navigateur ; thème, polices et couleurs du site, liste avec corbeilles.
 - Le produit conserve cette autorité visuelle. Les interfaces et captures de la version 1.0.0 emploient des contenus de démonstration pour la recette, sans reprendre de textes d’abonnés.
 
 ## Contraintes établies

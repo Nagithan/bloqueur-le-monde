@@ -2,8 +2,7 @@ import { compileRules, identityKey } from '../core/model.ts';
 import type { Snapshot } from '../core/model.ts';
 import { Client } from '../shared/client.ts';
 import { button, el } from '../shared/dom.ts';
-import { closeModal } from '../shared/modal.ts';
-import { DISCUSSION_SELECTOR, ROOT_SELECTOR, getDiscussion, getList, own, readComment, themeOf } from './adapter.ts';
+import { DISCUSSION_SELECTOR, ROOT_SELECTOR, getDiscussion, own, readComment, themeOf } from './adapter.ts';
 import type { CommentView } from './adapter.ts';
 import { blockComment, dismissToast, openManager, toast } from './ui.ts';
 
@@ -13,13 +12,11 @@ function start(): void {
   let decide: ReturnType<typeof compileRules> | undefined;
   let discussion: HTMLElement | null = null;
   let discussionKey = '';
-  let temporary = false;
-  let revealed = new WeakSet<HTMLElement>();
+  let settingsOpened = false;
   const views = new Map<HTMLElement, CommentView>();
-  const placeholders = new WeakMap<HTMLElement, HTMLElement>();
   const boundButtons = new WeakSet<HTMLButtonElement>();
   const boundAccountShortcuts = new WeakSet<HTMLElement>();
-  const summary = el('div', { class: 'blm-summary', 'data-blm-owned': '', hidden: '' });
+  let welcome: { host: HTMLElement; original: DocumentFragment; counter: HTMLElement } | undefined;
   let timer: ReturnType<typeof setTimeout> | undefined;
   let processing = false;
   let stopped = false;
@@ -42,23 +39,28 @@ function start(): void {
   function restore(root: HTMLElement): void {
     root.removeAttribute('data-blm-hidden-leaf');
     for (const part of root.querySelectorAll('.blm-hidden-part')) if (part.closest(ROOT_SELECTOR) === root) part.classList.remove('blm-hidden-part');
-    placeholders.get(root)?.remove();
+  }
+  function restoreWelcome(): void {
+    if (welcome) { welcome.host.replaceChildren(welcome.original); welcome = undefined; }
   }
   function cleanup(): void {
     for (const [root] of views) { restore(root); root.querySelectorAll('.blm-block-button').forEach(node => node.remove()); }
-    views.clear(); summary.remove(); summary.replaceChildren(); delete summary.dataset.signature; temporary = false; revealed = new WeakSet(); closeModal();
+    views.clear(); restoreWelcome();
   }
   async function render(): Promise<void> {
-    if (!snapshot || !decide || processing) return;
+    if (processing) return;
+    // Keep settings and recovery reachable even when saved preferences cannot load.
+    addAccountShortcut();
+    if (location.hash !== '#blm-settings') settingsOpened = false;
+    else if (!settingsOpened) { settingsOpened = true; openManager(client); }
+    if (!snapshot || !decide) return;
     processing = true; observer.disconnect();
     const revisionAtStart = snapshot.state.revision;
     let rootsAtStart = 0;
     try {
       const next = getDiscussion(); const key = `${location.pathname}${location.search}`;
       if (next !== discussion || key !== discussionKey) { cleanup(); discussion = next; discussionKey = key; }
-      addAccountShortcut();
       if (!discussion) return;
-      const hostTheme = themeOf(discussion);
       const current = new Set<HTMLElement>(); const hiddenIds = new Set<string | HTMLElement>(); const hiddenAuthors = new Set<string>();
       const nodes = [...discussion.querySelectorAll<HTMLElement>(ROOT_SELECTOR)];
       rootsAtStart = nodes.length;
@@ -70,20 +72,14 @@ function start(): void {
         const root = nodes[index]; current.add(root); restore(root);
         const view = readComment(root);
         if (!view) { root.querySelectorAll('.blm-block-button').forEach(node => node.remove()); views.delete(root); continue; }
-        const previousView = views.get(root);
-        if (previousView && (previousView.author.name !== view.author.name || previousView.author.id !== view.author.id)) revealed.delete(root);
         views.set(root, view);
         const result = decide(view.author);
-        const blocked = result.blocked && !temporary && !revealed.has(root);
+        const blocked = result.blocked;
         if (blocked) {
           hiddenIds.add(view.id ?? root); hiddenAuthors.add(identityKey(result.identity));
           if (!view.hasReplies && !view.hasDraft) root.setAttribute('data-blm-hidden-leaf', '');
           else {
             for (const part of view.parts) if (!part.querySelector('textarea')) part.classList.add('blm-hidden-part');
-            let placeholder = placeholders.get(root);
-            if (!placeholder) { placeholder = el('div', { class: 'blm-placeholder', 'data-blm-owned': '' }, el('span', {}, 'Commentaire masqué'), button('Afficher ce commentaire', () => { revealed.add(root); schedule(); }, '')); placeholders.set(root, placeholder); }
-            applyThemeTokens(placeholder, hostTheme);
-            root.prepend(placeholder);
           }
         }
         let previous: HTMLButtonElement | null = own<HTMLButtonElement>(root, '.blm-block-button')[0] ?? null;
@@ -115,35 +111,32 @@ function start(): void {
   }
   function updateSummary(count: number, authors: number): void {
     if (!snapshot || !discussion) return;
-    const theme = themeOf(discussion); const isDark = theme === 'dark';
-    summary.style.setProperty('--blm-bg', isDark ? '#2c3441' : '#f5f6f8'); summary.style.setProperty('--blm-fg', isDark ? '#f0f2f5' : '#263244'); summary.style.setProperty('--blm-line', isDark ? '#596474' : '#d7dce2'); summary.style.setProperty('--blm-link', isDark ? '#9aceff' : '#075ba7');
-    const showWelcome = snapshot.state.settings.enabled && snapshot.state.settings.communityEnabled && (!snapshot.state.hasSeenWelcome || snapshot.state.communityVersionSeen !== snapshot.community.version);
-    const visible = count > 0 || temporary || showWelcome;
-    summary.hidden = !visible;
-    // Keep controls focused and stable when repeated site mutations leave the counts unchanged.
-    const signature = `${count}:${authors}:${temporary}:${showWelcome}:${theme}:${snapshot.community.version}`;
-    if (summary.dataset.signature !== signature) {
-      summary.dataset.signature = signature; summary.replaceChildren();
-      if (showWelcome) {
-        const number = snapshot.community.entries.length;
-        summary.append(el('p', {}, `${snapshot.state.hasSeenWelcome ? 'Liste communautaire mise à jour' : 'Liste communautaire active'} : ${number} ${number === 1 ? 'pseudonyme' : 'pseudonymes'} (version ${snapshot.community.version}).`), el('div', { class: 'blm-summary-actions' }, button('Consulter', () => openManager(client, summary.querySelector('button') ?? undefined, theme), ''), button('Désactiver la liste', () => { void client.send({ type: 'settings', patch: { communityEnabled: false } }).catch(error => toast(error.message, theme)); }, ''), button('Compris', () => { void client.send({ type: 'seen' }).catch(error => toast(error.message, theme)); }, '')));
-      }
-      if (count > 0) summary.append(el('p', {}, `${count} ${count === 1 ? 'commentaire masqué' : 'commentaires masqués'} de ${authors} ${authors === 1 ? 'auteur' : 'auteurs'} parmi les commentaires chargés.`));
-      if (temporary) summary.append(el('p', {}, 'Affichage temporaire : vos préférences sont conservées.'));
-      if (count > 0 || temporary) summary.append(el('div', { class: 'blm-summary-actions' }, button('Gérer les auteurs', () => openManager(client, summary.querySelector('button') ?? undefined, theme), ''), button(temporary ? 'Masquer à nouveau' : 'Afficher temporairement', () => { temporary = !temporary; if (!temporary) revealed = new WeakSet(); schedule(); }, '')));
+    const host = discussion.querySelector<HTMLElement>('[data-element="welcome-message"],.ds-comments-welcome-message');
+    if (welcome && (welcome.host !== host || !snapshot.state.settings.enabled)) restoreWelcome();
+    if (!host || !snapshot.state.settings.enabled) return;
+    if (!welcome) {
+      // Reuse the host's text element and its typography; never match editorial copy.
+      const native = host.querySelector<HTMLElement>('.ds-comments-welcome-message__text,p');
+      const counter = el('p', { class: native?.className ?? 'ds-comments-welcome-message__text', 'data-blm-owned': '', 'data-blm-counter': '', role: 'status' });
+      const original = document.createDocumentFragment();
+      original.append(...host.childNodes);
+      welcome = { host, original, counter };
     }
-    if (visible) { const list = getList(discussion); if (list && !summary.isConnected) list.before(summary); }
+    const text = `${count} ${count > 1 ? 'commentaires masqués' : 'commentaire masqué'} · ${authors} ${authors > 1 ? 'commentateurs' : 'commentateur'}`;
+    if (welcome.counter.textContent !== text) welcome.counter.textContent = text;
+    if (host.childNodes.length !== 1 || host.firstChild !== welcome.counter) host.replaceChildren(welcome.counter);
   }
   function addAccountShortcut(): void {
     for (const context of document.querySelectorAll<HTMLElement>('[data-component*="account"],.ds-account,.ds-header__account,.account,.js-user-connexion')) {
       if (context.closest('[data-blm-ui]')) continue;
       const existing = context.querySelector<HTMLElement>('.blm-account-link');
-      if (existing && boundAccountShortcuts.has(existing)) { applyThemeTokens(existing, themeOf(context)); continue; }
+      if (existing && boundAccountShortcuts.has(existing)) continue;
       existing?.remove();
       const link = context.querySelector<HTMLAnchorElement>('a[href^="https://compte.lemonde.fr"]');
       if (!link?.parentElement) continue;
-      const shortcut = button('Auteurs masqués — extension', () => { void client.send({ type: 'options' }).catch(error => toast(error.message, themeOf(document.body))); }, 'blm-account-link');
-      shortcut.setAttribute('data-blm-owned', ''); applyThemeTokens(shortcut, themeOf(context));
+      const shortcut = button('', () => openManager(client, shortcut), 'Connexion__link blm-account-link');
+      shortcut.append(el('div', {}, el('span', { class: 'Connexion__label' }, 'Commentateurs masqués (Extension)')));
+      shortcut.setAttribute('data-blm-owned', '');
       boundAccountShortcuts.add(shortcut);
       // The current host groups subscription details in this header. Keep the local
       // preference shortcut as its sibling, outside account-identifying content.
@@ -151,9 +144,9 @@ function start(): void {
       if (header && context.contains(header)) header.after(shortcut); else link.parentElement.append(shortcut);
     }
   }
-  function applyThemeTokens(node: HTMLElement, theme: 'light' | 'dark'): void {
-    const dark = theme === 'dark'; node.style.setProperty('--blm-fg', dark ? '#f0f2f5' : '#263244'); node.style.setProperty('--blm-bg', dark ? '#2c3441' : '#f5f6f8'); node.style.setProperty('--blm-link', dark ? '#9aceff' : '#075ba7');
-  }
+  chrome.runtime.onMessage.addListener((message, sender, respond) => {
+    if (sender.id === chrome.runtime.id && message?.type === 'blm-open-settings') { openManager(client); respond(true); }
+  });
   client.subscribe(next => { if (snapshot && next.state.revision !== snapshot.state.revision) dismissToast(); snapshot = next; decide = compileRules(next); schedule(); });
   void client.send({ type: 'get' }).catch(error => { if (getDiscussion()) toast(error.message, themeOf(document.body)); });
   for (const event of ['popstate', 'hashchange', 'pageshow', 'commentsLoaded', 'commentsAdded']) addEventListener(event, schedule);

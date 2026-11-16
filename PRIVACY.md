@@ -22,7 +22,7 @@ La seule permission d’API demandée est `storage`. L’injection est limitée 
 
 L’extension n’effectue aucune requête réseau applicative : pas de télémétrie, publicité, analyse d’usage, vente de données ou téléchargement d’une liste distante. Chrome et le Store gèrent leurs propres mises à jour ; Le Monde continue d’effectuer son trafic habituel. Ouvrir volontairement un lien vers GitHub entraîne le trafic normal d’une visite de ce site.
 
-Le stockage n’est pas exposé aux scripts du site. Le masquage modifie cependant le DOM partagé : le site peut observer les éléments masqués. Si le lecteur ouvre le gestionnaire intégré à la page, ses préférences y sont affichées et peuvent être observées par la page. La page d’options de l’extension offre une interface séparée. L’activité de l’extension n’est pas présentée comme invisible au site.
+Le stockage n’est pas exposé aux scripts du site. Le masquage modifie cependant le DOM partagé : le site peut observer les éléments masqués. Si le lecteur ouvre le gestionnaire intégré à la page, ses préférences y sont affichées et peuvent être observées par la page. Les options Chrome et le bouton de l’extension ouvrent ce même gestionnaire sur Le Monde. L’activité de l’extension n’est pas présentée comme invisible au site.
 
 ## Contrôle du lecteur
 
